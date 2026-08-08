@@ -1,0 +1,93 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-password}
+      POSTGRES_DB: ${DATABASE_NAME:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: chromadb
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+
+  dagster-webserver:
+    build:
+      context: ./pipelines
+      dockerfile: Dockerfile
+    image: ${GHCR_IMAGE:-dagster-app:latest}
+    container_name: dagster-webserver
+    restart: always
+    depends_on:
+      - postgres
+      - chromadb
+    entrypoint: ["dagster-webserver", "-h", "0.0.0.0", "-p", "3000", "-m", "pipelines.definitions"]
+    ports:
+      - "3000:3000"
+    environment:
+      - DAGSTER_HOME=/opt/dagster/dagster_home
+      - DATABASE_HOST=postgres
+      - DATABASE_USER=${DATABASE_USER:-postgres}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD:-password}
+      - DATABASE_NAME=${DATABASE_NAME:-postgres}
+      - CHROMADB_HOST=chromadb
+      - CHROMADB_PORT=8000
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL}
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+      - AZURE_OPENAI_API_ENDPOINT=${AZURE_OPENAI_API_ENDPOINT}
+    volumes:
+      - ./pipelines:/opt/dagster/app
+      - dagster_data:/opt/dagster/dagster_home
+
+  dagster-daemon:
+    build:
+      context: ./pipelines
+      dockerfile: Dockerfile
+    image: ${GHCR_IMAGE:-dagster-app:latest}
+    container_name: dagster-daemon
+    restart: always
+    depends_on:
+      - postgres
+      - chromadb
+    entrypoint: ["dagster-daemon", "run"]
+    environment:
+      - DAGSTER_HOME=/opt/dagster/dagster_home
+      - DATABASE_HOST=postgres
+      - DATABASE_USER=${DATABASE_USER:-postgres}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD:-password}
+      - DATABASE_NAME=${DATABASE_NAME:-postgres}
+      - CHROMADB_HOST=chromadb
+      - CHROMADB_PORT=8000
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL}
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+      - AZURE_OPENAI_API_ENDPOINT=${AZURE_OPENAI_API_ENDPOINT}
+    volumes:
+      - ./pipelines:/opt/dagster/app
+      - dagster_data:/opt/dagster/dagster_home
+
+volumes:
+  dagster_data:
+    driver: local
+  chroma_data:
+    driver: local
+  postgres_data:
+    driver: local

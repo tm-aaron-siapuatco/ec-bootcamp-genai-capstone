@@ -1,0 +1,217 @@
+cust_id,full_name,dob,email_address,phone_local,city,region,zip_code,country_code,join_date,kyc_level_text,tier,segment_name,is_active,total_relationship_balance,average_daily_balance,customer_since_year,opt_in_marketing,legacy_external_id
+CUST-000001,Sofia Garcia,04/09/1979, SOFIA.GARCIA1@MAIL.COM ,09276804025,Makati,Iloilo,1652,PH,10/30/2022,BASIC,priority,Mass Affluent,N,"2,113,649.38","311,245.38",2022,Y,LEG-10001
+CUST-000002,Miguel Ramos,28/04/1963,miguel.ramos2@bankmail.ph,09086875935,Iloilo City,Davao del Sur,5702,PH,02/12/2018,BASIC,lite,Mass,Y,"2,267,598.10","775,379.43",2018,Y,LEG-10002
+CUST-000003,Andrea Aquino,18/10/1973,andrea.aquino3@inbox.ph,09760652429,Bacolod,Cebu,6872,PH,05/12/2021,SIMPLIFIED,lite,Mass,Y,"4,381,961.76","701,715.34",2021,Y,LEG-10003
+CUST-000004,Sofia Castillo,01/03/1996,sofia.castillo4@mail.com,09225258329,Bacolod,Negros Occidental,0016,PH,04/01/2020,BASIC,lite,Affluent,Y,"2,646,042.61","1,031,632.30",2020,Y,LEG-10004
+CUST-000005,Emily Dela Cruz,05/03/2003,emily.delacruz5@inbox.ph,09732107797,Bacolod,Metro Manila,8266,PH,12/12/2020,SIMPLIFIED,priority,Mass,Y,"4,592,548.98","1,192,366.27",2020,N,LEG-10005
+CUST-000006,Glenn Dela Cruz,26/07/1987,glenn.delacruz6@inbox.ph,09225078951,Davao City,Iloilo,1569,PH,06/23/2019,FULL,priority,SME,Y,"4,975,751.63","1,380,558.71",2019,N,LEG-10006
+CUST-000007,Kayle Perez,09/11/1965,kayle.perez7@mail.com,09235220629,Manila,Metro Manila,5245,PH,04/21/2020,SIMPLIFIED,priority,Affluent,Y,"4,037,677.49","470,968.71",2020,Y,LEG-10007
+CUST-000008,Ana Villanueva,31/12/1992,ana.villanueva8@bankmail.ph,09476904382,Pasig,Iloilo,4422,PH,07/27/2015,FULL,lite,SME,Y,"3,261,072.33","780,067.34",2015,N,LEG-10008
+CUST-000009,Juan Reyes,02/12/1969,juan.reyes9@bankmail.ph,0942-403-9274,Cebu City,Iloilo,6412,PH,07/25/2015,BASIC,privilege,Mass,Y,"2,921,303.79","660,207.74",2015,Y,LEG-10009
+CUST-000010,Emily Perez,07/02/1960,emily.perez10@example.com,0980-084-9550,BGC,Negros Occidental,6532,PH,03/28/2022,SIMPLIFIED,lite,Mass Affluent,Y,"1,500,685.40","241,103.15",2022,Y,LEG-10010
+CUST-000011,Ethan Reyes,12/02/1996,ethan.reyes11@example.com,09022988318,Mandaluyong,Iloilo,9856,PH,12/19/2017,BASIC,priority,Mass Affluent,N,"578,027.92","50,555.82",2017,N,LEG-10011
+CUST-000012,Quiel Mendoza,11/04/1980,quiel.mendoza12@mail.com,09726249804,Mandaluyong,Metro Manila,0762,PH,11/05/2015,SIMPLIFIED,privilege,Affluent,Y,"4,725,309.64","1,379,114.07",2015,N,LEG-10012
+CUST-000013,Luis Rivera,15/02/1988,luis.rivera13@mail.com,09403990366,Manila,Iloilo,8461,PH,11/19/2024,FULL,priority,SME,N,"2,062,059.76","232,551.33",2024,N,LEG-10013
+CUST-000014,Ciara Villanueva,08/12/1978,ciara.villanueva14@mail.com,09718828437,Pasig,Cebu,0138,PH,06/17/2024,FULL,lite,Microfinance,Y,"2,681,542.45","1,015,588.61",2024,N,LEG-10014
+CUST-000015,Ana Flores,25/10/1978,ana.flores15@example.com,09147365352,Cebu City,Metro Manila,5869,PH,09/14/2018,SIMPLIFIED,lite,Affluent,N,"3,116,153.89","879,333.81",2018,N,LEG-10015
+CUST-000016,Ana Torres,30/09/1982,ana.torres16@bankmail.ph,0936-516-3715,Cebu City,Iloilo,8327,PH,09/24/2020,SIMPLIFIED,lite,Mass Affluent,Y,"2,366,457.74","864,735.11",2020,Y,LEG-10016
+CUST-000017,Isabella Cruz,17/06/1980,isabella.cruz17@inbox.ph,0909-238-1096,BGC,Negros Occidental,4616,PH,06/03/2023,FULL,lite,Mass Affluent,Y,"4,302,342.39","1,548,468.19",2023,Y,LEG-10017
+CUST-000018,Ethan Villanueva,12/10/1970,ethan.villanueva18@bankmail.ph,09028486959,Davao City,Iloilo,8849,PH,06/07/2023,FULL,lite,Mass Affluent,Y,"1,236,951.45","337,912.26",2023,N,LEG-10018
+CUST-000019,Ethan Perez,18/06/1976,ethan.perez19@inbox.ph,09472380131,Pasig,Metro Manila,4340,PH,03/22/2015,FULL,lite,Affluent,N,"4,283,803.43","1,362,070.01",2015,N,LEG-10019
+CUST-000020,Marlon Castillo,23/07/1986,marlon.castillo20@inbox.ph,09789475622,Cebu City,Negros Occidental,0364,PH,04/21/2015,BASIC,privilege,Mass,Y,"4,534,737.38","1,166,164.27",2015,N,LEG-10020
+CUST-000021,Liam Dela Cruz,14/06/1993,liam.delacruz21@mail.com,09812343829,Cebu City,Davao del Sur,8470,PH,06/14/2015,BASIC,lite,Microfinance,N,"3,771,411.79","1,442,052.50",2015,N,LEG-10021
+CUST-000022,Miguel Dela Cruz,02/09/1968,miguel.delacruz22@mail.com,09165267167,BGC,Cebu,9103,PH,11/08/2015,SIMPLIFIED,prestige,Mass Affluent,Y,"2,960,897.21","1,008,777.89",2015,N,LEG-10022
+CUST-000023,Kylie Garcia,10/11/1965,kylie.garcia23@example.com,09343538819,Davao City,Cebu,4792,PH,03/14/2023,SIMPLIFIED,privilege,Affluent,Y,"2,962,780.62","482,360.25",2023,N,LEG-10023
+CUST-000024,Kylie Reyes,11/06/1995,kylie.reyes24@mail.com,09756343432,Mandaluyong,Iloilo,7209,PH,09/29/2022,SIMPLIFIED,privilege,Mass,Y,"2,380,989.46","712,260.72",2022,N,LEG-10024
+CUST-000025,Kayle Dela Cruz,25/05/1981,kayle.delacruz25@mail.com,09426353953,Davao City,Davao del Sur,3273,PH,04/14/2023,FULL,prestige,Affluent,Y,"2,421,508.74","735,181.56",2023,N,LEG-10025
+CUST-000026,Ethan Perez,22/05/1980,ethan.perez26@example.com,09823371002,Quezon City,Negros Occidental,1024,PH,04/12/2016,SIMPLIFIED,prestige,Mass,N,"4,110,756.11","782,061.50",2016,N,LEG-10026
+CUST-000027,Jose Soriano,11/08/1968,jose.soriano27@mail.com,09890254567,Cebu City,Negros Occidental,9254,PH,07/22/2023,FULL,lite,Mass Affluent,Y,"1,039,731.74","128,779.94",2023,Y,LEG-10027
+CUST-000028,Liam Reyes,08/07/1976, LIAM.REYES28@MAIL.COM ,09514640228,BGC,Cebu,9766,PH,12/24/2017,SIMPLIFIED,lite,SME,Y,"4,133,329.17","309,972.59",2017,N,LEG-10028
+CUST-000029,Andrea Torres,22/11/1980,andrea.torres29@bankmail.ph,09166954004,Manila,Iloilo,2098,PH,01/08/2018,FULL,prestige,Mass Affluent,Y,"2,881,658.68","913,739.82",2018,Y,LEG-10029
+CUST-000030,Andrea Castillo,03/09/1994,andrea.castillo30@inbox.ph,09156403368,Manila,Negros Occidental,6298,PH,08/31/2023,SIMPLIFIED,privilege,Mass Affluent,Y,"2,021,471.11","465,158.07",2023,Y,LEG-10030
+CUST-000031,Juan Rivera,28/01/1992,juan.rivera31@example.com,09137672594,Davao City,Metro Manila,0677,PH,06/08/2024,SIMPLIFIED,lite,Mass,Y,"4,564,736.46","965,472.63",2024,N,LEG-10031
+CUST-000032,Ana Mendoza,08/03/1981, ANA.MENDOZA32@INBOX.PH ,09444411571,BGC,Davao del Sur,7837,PH,07/03/2021,FULL,lite,Mass,N,"4,994,512.76","1,105,655.87",2021,Y,LEG-10032
+CUST-000033,Luis Domingo,14/06/1998,luis.domingo33@inbox.ph,09373989238,Cebu City,Metro Manila,3493,PH,06/01/2015,FULL,priority,Microfinance,Y,"632,105.10","245,176.98",2015,Y,LEG-10033
+CUST-000034,Ciara Garcia,12/12/1963, CIARA.GARCIA34@BANKMAIL.PH ,0901-890-7263,BGC,Davao del Sur,8833,PH,10/08/2015,FULL,priority,Affluent,Y,"1,174,616.45","340,098.27",2015,Y,LEG-10034
+CUST-000035,Pam Gonzales,07/12/1993, PAM.GONZALES35@EXAMPLE.COM ,0977-112-0303,Cebu City,Cebu,2461,PH,07/31/2020,SIMPLIFIED,privilege,Mass,Y,"4,564,232.25","456,839.49",2020,N,LEG-10035
+CUST-000036,Kayle Flores,27/11/1977,kayle.flores36@example.com,09842509929,Mandaluyong,Negros Occidental,8134,PH,04/24/2018,SIMPLIFIED,privilege,Mass,N,"110,676.05","37,686.65",2018,Y,LEG-10036
+CUST-000037,Marlon Flores,27/05/1959,marlon.flores37@bankmail.ph,09897282127,Quezon City,Metro Manila,9634,PH,05/20/2023,BASIC,privilege,Mass Affluent,Y,"2,078,099.96","249,950.08",2023,Y,LEG-10037
+CUST-000038,Isabella Rivera,16/08/2002,isabella.rivera38@inbox.ph,09828487319,Quezon City,Cebu,8799,PH,01/06/2021,FULL,lite,Affluent,Y,"618,820.10","110,771.88",2021,Y,LEG-10038
+CUST-000039,Noah Flores,08/03/1989,noah.flores39@inbox.ph,0912-085-9208,Mandaluyong,Negros Occidental,1009,PH,02/28/2019,SIMPLIFIED,lite,Mass,Y,"3,352,760.61","1,039,687.86",2019,Y,LEG-10039
+CUST-000040,Quiel Villanueva,11/11/1968,quiel.villanueva40@bankmail.ph,09686926242,Manila,Metro Manila,9396,PH,03/29/2024,FULL,lite,Mass,N,"2,274,132.13","641,234.90",2024,Y,LEG-10040
+CUST-000041,Sofia Valdez,16/07/1959,sofia.valdez41@gmail.com,09215072283,Quezon City,Iloilo,0811,PH,03/02/2015,FULL,lite,Mass,Y,"1,791,853.15","584,056.39",2015,N,LEG-10041
+CUST-000042,Marts Ramos,19/08/1970,marts.ramos42@inbox.ph,0907-574-7515,Iloilo City,Metro Manila,7963,PH,10/13/2019,FULL,lite,Mass Affluent,N,"3,430,801.38","760,245.34",2019,Y,LEG-10042
+CUST-000043,Kayle Reyes,24/11/1983,kayle.reyes43@mail.com,09026539546,BGC,Metro Manila,8677,PH,02/01/2020,BASIC,privilege,Mass,Y,"1,994,252.19","608,973.58",2020,N,LEG-10043
+CUST-000044,Ciara Villanueva,13/11/1977,ciara.villanueva44@inbox.ph,09964004731,Makati,Iloilo,9564,PH,07/30/2015,SIMPLIFIED,priority,SME,N,"4,842,024.73","1,259,621.41",2015,N,LEG-10044
+CUST-000045,Aaron Garcia,09/07/2000,aaron.garcia45@mail.com,09148351224,Bacolod,Iloilo,6609,PH,06/19/2018,BASIC,lite,Affluent,Y,"4,607,766.07","796,490.14",2018,N,LEG-10045
+CUST-000046,Andrea Mendoza,15/12/1990,andrea.mendoza46@example.com,0916-072-4337,Iloilo City,Iloilo,0016,PH,12/16/2019,FULL,lite,Mass Affluent,Y,"2,071,504.51","259,868.45",2019,Y,LEG-10046
+CUST-000047,AJ Garcia,27/07/1993,aj.garcia47@example.com,09264603503,Pasig,Cebu,7214,PH,04/07/2021,SIMPLIFIED,lite,Mass Affluent,Y,"4,166,937.66","1,384,131.95",2021,Y,LEG-10047
+CUST-000048,Jose Navarro,19/02/1994,jose.navarro48@example.com,09403446249,Quezon City,Iloilo,4634,PH,10/05/2024,SIMPLIFIED,lite,Mass,Y,"1,552,062.53","262,034.17",2024,N,LEG-10048
+CUST-000049,Ciara Cruz,18/10/2000,ciara.cruz49@example.com,09517396112,Quezon City,Iloilo,1709,PH,08/21/2022,SIMPLIFIED,privilege,Mass Affluent,Y,"4,620,847.14","1,143,992.94",2022,N,LEG-10049
+CUST-000050,Sofia Valdez,13/05/1983,sofia.valdez50@mail.com,09446753040,Manila,Davao del Sur,0886,PH,06/18/2015,SIMPLIFIED,privilege,Mass Affluent,Y,"2,249,218.78","749,969.55",2015,Y,LEG-10050
+CUST-000051,Sofia Bautista,02/09/1997,sofia.bautista51@mail.com,09948890607,Davao City,Iloilo,5132,PH,04/05/2022,SIMPLIFIED,lite,Mass Affluent,Y,"1,673,912.09","276,851.27",2022,Y,LEG-10051
+CUST-000052,Quiel Navarro,10/08/1977,quiel.navarro52@mail.com,09351396359,Mandaluyong,Iloilo,3786,PH,03/31/2022,FULL,privilege,Affluent,Y,"3,352,609.74","764,297.70",2022,N,LEG-10052
+CUST-000053,Juan Aquino,04/03/1971,juan.aquino53@mail.com,0937-191-2755,Bacolod,Metro Manila,6865,PH,11/09/2016,FULL,lite,Mass,Y,"3,606,193.81","235,456.87",2016,N,LEG-10053
+CUST-000054,Aaron Gonzales,24/07/1980,aaron.gonzales54@bankmail.ph,09229791654,Mandaluyong,Negros Occidental,5411,PH,03/01/2019,BASIC,priority,Mass Affluent,Y,"2,773,149.19","238,231.28",2019,Y,LEG-10054
+CUST-000055,Emily Perez,28/07/1980, EMILY.PEREZ55@EXAMPLE.COM ,09729149243,Makati,Negros Occidental,0529,PH,04/16/2022,FULL,lite,Mass Affluent,N,"1,677,116.49","169,585.42",2022,Y,LEG-10055
+CUST-000056,Maria Torres,14/06/1967,maria.torres56@bankmail.ph,0940-028-5751,Mandaluyong,Cebu,3047,PH,03/09/2015,FULL,lite,Mass Affluent,Y,"3,160,142.76","794,038.36",2015,Y,LEG-10056
+CUST-000057,Amelia Mendoza,05/07/1993,amelia.mendoza57@example.com,09624609055,Bacolod,Iloilo,0803,PH,09/14/2017,SIMPLIFIED,privilege,Mass Affluent,Y,"3,664,972.17","989,139.11",2017,Y,LEG-10057
+CUST-000058,Ethan Soriano,20/12/1966,ethan.soriano58@example.com,09336869411,Davao City,Metro Manila,2010,PH,11/03/2017,FULL,privilege,SME,Y,"184,067.24","50,878.98",2017,Y,LEG-10058
+CUST-000059,Pam Aquino,11/10/1984,pam.aquino59@inbox.ph,09138783944,Bacolod,Davao del Sur,8706,PH,05/31/2022,SIMPLIFIED,privilege,Affluent,Y,"1,478,904.11","304,758.53",2022,Y,LEG-10059
+CUST-000060,Amelia Villanueva,28/10/1994,amelia.villanueva60@gmail.com,0947-964-6706,Cebu City,Davao del Sur,5710,PH,08/24/2017,SIMPLIFIED,privilege,Affluent,Y,"3,892,798.35","693,754.92",2017,Y,LEG-10060
+CUST-000061,Marlon Soriano,06/10/1968,marlon.soriano61@bankmail.ph,09937553621,Quezon City,Negros Occidental,5917,PH,07/04/2020,FULL,lite,Affluent,Y,"1,001,691.53","97,669.88",2020,N,LEG-10061
+CUST-000062,Jose Domingo,07/12/1994, JOSE.DOMINGO62@EXAMPLE.COM ,09899675221,Quezon City,Davao del Sur,5121,PH,01/05/2024,SIMPLIFIED,lite,Affluent,Y,"4,915,076.78","468,996.28",2024,Y,LEG-10062
+CUST-000063,Daniel Reyes,30/09/1982,daniel.reyes63@bankmail.ph,0997-578-0964,Bacolod,Davao del Sur,1855,PH,04/28/2024,SIMPLIFIED,lite,Affluent,N,"621,681.44","64,378.48",2024,N,LEG-10063
+CUST-000064,Andrea Cruz,25/03/1975,andrea.cruz64@inbox.ph,09952019266,BGC,Iloilo,6551,PH,06/18/2015,SIMPLIFIED,priority,Mass Affluent,N,"4,126,356.10","247,295.50",2015,Y,LEG-10064
+CUST-000065,Maria Soriano,29/11/1973,maria.soriano65@bankmail.ph,09608563284,Davao City,Metro Manila,6144,PH,08/26/2024,FULL,lite,Mass,Y,"1,727,507.43","327,450.44",2024,N,LEG-10065
+CUST-000066,Ethan Aquino,11/07/1964,ethan.aquino66@inbox.ph,09214109849,Quezon City,Davao del Sur,9711,PH,01/04/2016,FULL,privilege,Microfinance,Y,"4,726,218.79","1,072,405.33",2016,Y,LEG-10066
+CUST-000067,Kylie Bautista,29/08/1986,kylie.bautista67@example.com,09048645848,Manila,Negros Occidental,3451,PH,02/19/2018,SIMPLIFIED,lite,Mass Affluent,Y,"4,126,731.28","1,106,519.25",2018,N,LEG-10067
+CUST-000068,Johnna Garcia,04/09/1963,johnna.garcia68@bankmail.ph,09395316400,Manila,Negros Occidental,5181,PH,06/13/2024,SIMPLIFIED,lite,SME,Y,"1,496,872.48","251,071.48",2024,N,LEG-10068
+CUST-000069,Lucas Perez,12/12/1998, LUCAS.PEREZ69@INBOX.PH ,09403143886,Iloilo City,Negros Occidental,2695,PH,02/01/2023,SIMPLIFIED,lite,Mass,Y,"3,099,059.29","1,067,342.34",2023,N,LEG-10069
+CUST-000070,Luis Gonzales,10/11/1964,luis.gonzales70@mail.com,09031647987,Makati,Cebu,5594,PH,02/15/2021,SIMPLIFIED,prestige,Mass Affluent,Y,"1,772,080.66","567,413.89",2021,Y,LEG-10070
+CUST-000071,Noah Flores,09/06/1998,noah.flores71@mail.com,09922997764,Davao City,Davao del Sur,5972,PH,11/14/2018,FULL,privilege,Mass Affluent,Y,"4,773,089.71","1,582,830.73",2018,N,LEG-10071
+CUST-000072,Pam Santos,02/02/1962,pam.santos72@inbox.ph,09967282521,Iloilo City,Cebu,2656,PH,08/24/2023,FULL,lite,Mass,Y,"688,197.70","266,732.74",2023,N,LEG-10072
+CUST-000073,Andrea Villanueva,01/11/1997,andrea.villanueva73@mail.com,09722076278,Makati,Cebu,4890,PH,10/12/2024,BASIC,priority,Affluent,Y,"4,630,272.45","1,652,359.53",2024,Y,LEG-10073
+CUST-000074,Juan Torres,17/08/1964,juan.torres74@inbox.ph,09295498411,Quezon City,Negros Occidental,6703,PH,03/01/2022,BASIC,privilege,Mass,Y,"4,485,316.77","1,522,524.80",2022,Y,LEG-10074
+CUST-000075,AJ Ramos,17/12/1990,aj.ramos75@example.com,0911-322-2793,Iloilo City,Metro Manila,2326,PH,12/15/2024,FULL,lite,Mass Affluent,N,"3,518,081.62","558,820.11",2024,Y,LEG-10075
+CUST-000076,Ana Torres,24/10/1974,ana.torres76@mail.com,09944937978,Pasig,Cebu,6575,PH,04/17/2024,FULL,lite,Mass Affluent,Y,"2,738,698.59","621,466.77",2024,N,LEG-10076
+CUST-000077,Marts Rivera,05/10/1969,marts.rivera77@inbox.ph,09846748401,Cebu City,Negros Occidental,5563,PH,10/27/2015,BASIC,lite,Mass,Y,"227,403.72","38,791.69",2015,N,LEG-10077
+CUST-000078,Jose Rivera,11/03/1961,jose.rivera78@bankmail.ph,09047796493,Cebu City,Negros Occidental,0981,PH,06/05/2016,FULL,lite,SME,Y,"3,639,562.85","465,651.41",2016,N,LEG-10078
+CUST-000079,Juan Dela Cruz,15/07/1996,juan.delacruz79@bankmail.ph,0958-232-9718,Cebu City,Iloilo,7802,PH,07/19/2015,SIMPLIFIED,lite,Mass,Y,"1,224,426.02","80,178.91",2015,Y,LEG-10079
+CUST-000080,Kayle Gonzales,29/06/1974,kayle.gonzales80@example.com,09192955782,Quezon City,Iloilo,2309,PH,07/23/2020,FULL,priority,SME,Y,"235,373.60","40,141.84",2020,N,LEG-10080
+CUST-000081,Sofia Navarro,06/08/1983,sofia.navarro81@bankmail.ph,09421522814,Makati,Iloilo,4453,PH,02/28/2019,BASIC,lite,Mass,Y,"463,227.52","140,638.03",2019,Y,LEG-10081
+CUST-000082,Miguel Santos,02/11/1988,miguel.santos82@example.com,09817754839,Makati,Cebu,9919,PH,09/07/2017,FULL,lite,Mass Affluent,Y,"2,760,844.38","887,417.82",2017,Y,LEG-10082
+CUST-000083,Marlon Domingo,26/03/1987, MARLON.DOMINGO83@INBOX.PH ,0925-409-4893,Cebu City,Metro Manila,5212,PH,09/13/2018,SIMPLIFIED,privilege,SME,Y,"1,150,863.11","287,055.56",2018,Y,LEG-10083
+CUST-000084,Kylie Castillo,14/04/1985,kylie.castillo84@inbox.ph,09747747315,Quezon City,Iloilo,9958,PH,07/17/2016,BASIC,priority,Mass,Y,"4,212,881.04","551,894.52",2016,N,LEG-10084
+CUST-000085,Amelia Mendoza,16/08/1974,amelia.mendoza85@bankmail.ph,09366644050,Bacolod,Davao del Sur,5256,PH,11/17/2020,BASIC,priority,Mass Affluent,N,"745,338.53","87,335.95",2020,N,LEG-10085
+CUST-000086,AJ Flores,25/12/1978, AJ.FLORES86@BANKMAIL.PH ,09094262809,Makati,Metro Manila,4346,PH,09/18/2018,FULL,lite,Affluent,Y,"2,829,717.28","991,210.66",2018,Y,LEG-10086
+CUST-000087,Ana Perez,12/08/1975, ANA.PEREZ87@MAIL.COM ,09965296256,Quezon City,Davao del Sur,0218,PH,05/10/2021,SIMPLIFIED,priority,Affluent,Y,"4,173,418.15","777,110.54",2021,N,LEG-10087
+CUST-000088,Daniel Rivera,08/06/1989,daniel.rivera88@mail.com,09760730206,Iloilo City,Iloilo,3702,PH,11/04/2019,SIMPLIFIED,privilege,Microfinance,N,"929,503.49","237,075.71",2019,Y,LEG-10088
+CUST-000089,Marlon Reyes,01/07/1981,marlon.reyes89@mail.com,09701767310,Mandaluyong,Negros Occidental,3211,PH,12/20/2018,SIMPLIFIED,privilege,Mass Affluent,Y,"2,771,544.81","717,618.34",2018,N,LEG-10089
+CUST-000090,Isabella Ramos,09/02/1956,isabella.ramos90@inbox.ph,09477592561,Mandaluyong,Davao del Sur,2112,PH,01/31/2023,SIMPLIFIED,priority,Mass,N,"3,125,543.41","805,865.86",2023,N,LEG-10090
+CUST-000091,Miguel Domingo,26/02/1967,miguel.domingo91@inbox.ph,0903-838-4486,Iloilo City,Cebu,3664,PH,02/05/2022,SIMPLIFIED,lite,Mass,Y,"2,455,545.56","617,711.51",2022,N,LEG-10091
+CUST-000092,Kylie Ramos,23/02/1980,kylie.ramos92@bankmail.ph,09391917079,Pasig,Negros Occidental,7808,PH,10/31/2017,BASIC,privilege,Affluent,Y,"3,293,656.18","989,192.78",2017,N,LEG-10092
+CUST-000093,Isabella Navarro,16/04/1995,isabella.navarro93@bankmail.ph,09559840978,Iloilo City,Metro Manila,1261,PH,06/10/2023,FULL,privilege,Mass Affluent,Y,"1,658,651.91","545,167.16",2023,Y,LEG-10093
+CUST-000094,Ana Dela Cruz,19/03/1978,ana.delacruz94@mail.com,09555543755,Manila,Metro Manila,4290,PH,10/18/2023,SIMPLIFIED,privilege,Affluent,Y,"1,035,129.76","226,718.36",2023,Y,LEG-10094
+CUST-000095,Glenn Garcia,04/08/1995,glenn.garcia95@inbox.ph,09007031897,Bacolod,Cebu,5344,PH,06/09/2019,BASIC,privilege,Affluent,Y,"146,932.18","38,927.83",2019,N,LEG-10095
+CUST-000096,Miguel Domingo,15/07/1993, MIGUEL.DOMINGO96@BANKMAIL.PH ,0902-277-5753,Pasig,Negros Occidental,1649,PH,12/12/2018,SIMPLIFIED,lite,Mass,Y,"4,227,743.50","1,124,905.04",2018,N,LEG-10096
+CUST-000097,Lucas Torres,09/08/1962,lucas.torres97@mail.com,09321313554,Davao City,Iloilo,6695,PH,08/08/2015,SIMPLIFIED,lite,Mass Affluent,Y,"4,327,745.63","1,658,152.73",2015,N,LEG-10097
+CUST-000098,Glenn Mendoza,12/06/1989, GLENN.MENDOZA98@BANKMAIL.PH ,0944-741-5720,Pasig,Iloilo,2757,PH,02/02/2021,SIMPLIFIED,privilege,Mass Affluent,Y,"4,116,590.76","734,406.46",2021,Y,LEG-10098
+CUST-000099,Lucas Santos,06/01/2004,lucas.santos99@mail.com,0991-872-9438,Davao City,Metro Manila,7285,PH,07/24/2016,FULL,privilege,Mass Affluent,Y,"3,924,461.70","1,313,656.46",2016,Y,LEG-10099
+CUST-000100,Isabella Santos,22/06/1986,isabella.santos100@inbox.ph,0951-925-9598,Quezon City,Negros Occidental,9981,PH,07/16/2023,FULL,lite,SME,N,"4,217,934.73","790,631.88",2023,N,LEG-10100
+CUST-000101,Luis Soriano,29/02/1992,luis.soriano101@bankmail.ph,09468052939,Manila,Iloilo,0777,PH,12/29/2020,SIMPLIFIED,privilege,Mass Affluent,Y,"1,989,181.63","773,483.34",2020,Y,LEG-10101
+CUST-000102,Lucas Bautista,03/02/1979, LUCAS.BAUTISTA102@INBOX.PH ,09835543600,Davao City,Metro Manila,1840,PH,04/16/2022,FULL,lite,Microfinance,Y,"1,510,025.66","537,641.89",2022,N,LEG-10102
+CUST-000103,Daniel Flores,03/05/1987, DANIEL.FLORES103@INBOX.PH ,0906-606-7740,BGC,Metro Manila,2055,PH,08/24/2024,SIMPLIFIED,lite,Mass Affluent,Y,"2,112,147.35","203,318.06",2024,Y,LEG-10103
+CUST-000104,Jose Gonzales,06/01/1963,jose.gonzales104@gmail.com,09132388660,Iloilo City,Metro Manila,6132,PH,06/08/2017,FULL,priority,Affluent,Y,"434,353.48","36,990.75",2017,N,LEG-10104
+CUST-000105,Ethan Garcia,14/06/1989, ETHAN.GARCIA105@INBOX.PH ,09931205667,Makati,Davao del Sur,2613,PH,04/30/2019,FULL,priority,Mass Affluent,Y,"564,605.57","126,953.76",2019,N,LEG-10105
+CUST-000106,Johnna Reyes,31/01/1956,johnna.reyes106@inbox.ph,09918536797,Makati,Iloilo,0200,PH,08/29/2019,FULL,privilege,Affluent,Y,"2,118,452.60","404,194.60",2019,Y,LEG-10106
+CUST-000107,Sofia Rivera,12/09/1968,sofia.rivera107@inbox.ph,0900-991-3576,BGC,Davao del Sur,6780,PH,06/20/2018,SIMPLIFIED,lite,Mass,Y,"3,330,731.81","933,665.17",2018,Y,LEG-10107
+CUST-000108,Andrea Garcia,24/04/1967,andrea.garcia108@example.com,0919-577-1172,BGC,Metro Manila,3452,PH,08/16/2015,SIMPLIFIED,privilege,Microfinance,Y,"2,498,550.42","620,665.27",2015,N,LEG-10108
+CUST-000109,Aaron Cruz,25/03/1964, AARON.CRUZ109@EXAMPLE.COM ,09250824319,Makati,Iloilo,8762,PH,05/30/2021,SIMPLIFIED,priority,Mass,N,"1,864,668.03","420,882.29",2021,N,LEG-10109
+CUST-000110,Daniel Santos,09/01/1975, DANIEL.SANTOS110@EXAMPLE.COM ,0990-428-3502,Iloilo City,Davao del Sur,7239,PH,12/05/2023,FULL,priority,Microfinance,Y,"1,226,389.25","64,057.08",2023,Y,LEG-10110
+CUST-000111,Levy Dela Cruz,02/08/2003, LEVY.DELACRUZ111@INBOX.PH ,09660373732,Pasig,Negros Occidental,4097,PH,11/10/2022,FULL,priority,Mass,Y,"4,477,994.12","942,440.03",2022,N,LEG-10111
+CUST-000112,Noah Reyes,29/07/1963,noah.reyes112@mail.com,09635061289,Cebu City,Davao del Sur,3202,PH,03/23/2020,BASIC,privilege,Affluent,Y,"1,570,852.41","144,923.48",2020,Y,LEG-10112
+CUST-000113,Aaron Bautista,29/08/1982,aaron.bautista113@bankmail.ph,0921-168-6083,BGC,Cebu,9302,PH,03/27/2021,FULL,lite,Affluent,N,"3,740,644.16","514,145.63",2021,N,LEG-10113
+CUST-000114,Kayle Garcia,23/11/1965,kayle.garcia114@example.com,0907-214-6905,BGC,Metro Manila,9168,PH,03/03/2020,FULL,priority,Mass,Y,"254,137.87","94,906.80",2020,N,LEG-10114
+CUST-000115,Levy Navarro,24/08/1957,levy.navarro115@bankmail.ph,09612128062,Mandaluyong,Negros Occidental,4502,PH,01/27/2022,FULL,lite,Mass,Y,"4,970,442.30","1,194,297.08",2022,Y,LEG-10115
+CUST-000116,Juan Navarro,13/01/1998,juan.navarro116@bankmail.ph,09353205082,Davao City,Iloilo,3521,PH,04/07/2023,SIMPLIFIED,lite,Mass,Y,"280,487.37","111,840.75",2023,Y,LEG-10116
+CUST-000117,Kylie Soriano,31/10/1986,kylie.soriano117@mail.com,09158690795,Iloilo City,Cebu,8895,PH,03/23/2015,BASIC,lite,Mass,Y,"2,632,716.12","132,265.61",2015,Y,LEG-10117
+CUST-000118,Johnna Bautista,27/07/1985, JOHNNA.BAUTISTA118@MAIL.COM ,09983059788,BGC,Davao del Sur,7653,PH,03/03/2022,FULL,prestige,Mass,Y,"4,803,349.84","1,331,551.47",2022,N,LEG-10118
+CUST-000119,Andrea Rivera,05/01/1987,andrea.rivera119@mail.com,0968-372-1075,Iloilo City,Metro Manila,1386,PH,11/15/2015,SIMPLIFIED,lite,Mass Affluent,Y,"1,190,741.63","468,953.20",2015,Y,LEG-10119
+CUST-000120,Andrea Reyes,26/01/1995,andrea.reyes120@example.com,09220210379,Cebu City,Negros Occidental,8338,PH,01/23/2020,FULL,privilege,Affluent,Y,"369,473.24","127,843.97",2020,Y,LEG-10120
+CUST-000121,Pam Dela Cruz,05/06/1978,pam.delacruz121@example.com,09013758056,Davao City,Metro Manila,4664,PH,03/19/2021,FULL,lite,Mass,Y,"3,610,468.48","1,102,965.27",2021,Y,LEG-10121
+CUST-000122,Bryce Torres,23/04/1976, BRYCE.TORRES122@EXAMPLE.COM ,09058134266,Pasig,Metro Manila,0120,PH,05/31/2022,SIMPLIFIED,lite,Affluent,Y,"1,325,756.98","364,123.44",2022,Y,LEG-10122
+CUST-000123,Marlon Cruz,22/03/1989, MARLON.CRUZ123@INBOX.PH ,0910-428-5160,Manila,Iloilo,4720,PH,04/28/2020,FULL,privilege,Mass Affluent,Y,"2,863,998.74","379,407.39",2020,Y,LEG-10123
+CUST-000124,Pam Reyes,11/02/1958,pam.reyes124@mail.com,09171998149,Cebu City,Cebu,9682,PH,06/16/2019,BASIC,priority,SME,Y,"2,760,718.90","965,750.44",2019,Y,LEG-10124
+CUST-000125,AJ Domingo,18/11/2001,aj.domingo125@bankmail.ph,09115591177,Bacolod,Davao del Sur,8265,PH,08/20/2022,SIMPLIFIED,lite,Mass Affluent,Y,"3,468,612.60","220,513.18",2022,N,LEG-10125
+CUST-000126,Daniel Ramos,04/06/1959,daniel.ramos126@bankmail.ph,09980832460,Pasig,Cebu,3773,PH,03/28/2024,BASIC,privilege,Affluent,Y,"2,036,444.63","447,124.05",2024,N,LEG-10126
+CUST-000127,AJ Aquino,24/03/2001,aj.aquino127@mail.com,09074755182,Makati,Cebu,0031,PH,08/22/2022,SIMPLIFIED,privilege,Mass Affluent,N,"153,785.40","27,737.25",2022,N,LEG-10127
+CUST-000128,Johnna Domingo,30/07/1997,johnna.domingo128@inbox.ph,09382800087,Pasig,Cebu,6624,PH,06/25/2016,FULL,priority,Mass,Y,"3,237,210.40","842,968.56",2016,N,LEG-10128
+CUST-000129,Juan Gonzales,28/05/1982,juan.gonzales129@inbox.ph,0943-324-6831,Bacolod,Davao del Sur,5526,PH,02/08/2018,SIMPLIFIED,lite,Mass Affluent,Y,"1,306,473.39","390,482.45",2018,N,LEG-10129
+CUST-000130,Daniel Torres,13/06/1968, DANIEL.TORRES130@MAIL.COM ,09888666769,Mandaluyong,Negros Occidental,4759,PH,02/27/2022,FULL,lite,Affluent,Y,"3,924,700.38","1,441,480.74",2022,N,LEG-10130
+CUST-000131,Liam Aquino,06/12/1981, LIAM.AQUINO131@MAIL.COM ,09881012871,Manila,Metro Manila,2284,PH,04/27/2016,SIMPLIFIED,lite,SME,Y,"2,353,212.30","831,243.25",2016,N,LEG-10131
+CUST-000132,Marts Soriano,22/05/1961,marts.soriano132@bankmail.ph,0985-832-0812,Cebu City,Iloilo,8918,PH,07/07/2018,SIMPLIFIED,lite,Mass,N,"3,172,860.35","163,877.37",2018,N,LEG-10132
+CUST-000133,Bryce Bautista,19/03/1969,bryce.bautista133@bankmail.ph,09771444405,Manila,Metro Manila,8750,PH,07/02/2018,BASIC,privilege,Mass,N,"645,525.07","118,933.26",2018,N,LEG-10133
+CUST-000134,Marts Torres,09/11/1960, MARTS.TORRES134@EXAMPLE.COM ,09227538939,Manila,Cebu,1980,PH,08/28/2020,BASIC,prestige,Mass,Y,"845,754.72","150,803.99",2020,N,LEG-10134
+CUST-000135,Sofia Santos,12/12/1977,sofia.santos135@gmail.com,09501801412,Quezon City,Cebu,6636,PH,04/25/2024,FULL,lite,Mass Affluent,Y,"4,493,211.00","1,029,190.99",2024,Y,LEG-10135
+CUST-000136,Johnna Garcia,24/03/1965,johnna.garcia136@example.com,0946-789-3415,Pasig,Negros Occidental,3069,PH,09/26/2020,BASIC,privilege,Affluent,Y,"376,166.02","114,072.98",2020,N,LEG-10136
+CUST-000137,Daniel Flores,23/12/1995,daniel.flores137@gmail.com,09208883641,Makati,Metro Manila,8613,PH,02/21/2024,FULL,privilege,Mass Affluent,Y,"1,714,270.89","154,012.15",2024,Y,LEG-10137
+CUST-000138,Marlon Domingo,09/08/1989, MARLON.DOMINGO138@BANKMAIL.PH ,09767160914,Iloilo City,Negros Occidental,8613,PH,06/19/2016,FULL,lite,Mass Affluent,N,"2,415,915.20","533,537.89",2016,Y,LEG-10138
+CUST-000139,Daniel Villanueva,15/02/1959,daniel.villanueva139@example.com,09237675596,Manila,Iloilo,5706,PH,05/29/2024,FULL,lite,Mass,Y,"4,132,362.66","1,496,831.26",2024,N,LEG-10139
+CUST-000140,Johnna Santos,29/01/1969,johnna.santos140@bankmail.ph,09880429026,Cebu City,Cebu,0450,PH,03/14/2015,FULL,lite,Mass Affluent,Y,"514,113.96","99,901.85",2015,N,LEG-10140
+CUST-000141,Quiel Rivera,26/02/1963,quiel.rivera141@inbox.ph,0985-643-8883,Iloilo City,Iloilo,4671,PH,12/21/2023,SIMPLIFIED,lite,Affluent,N,"1,460,625.84","339,880.01",2023,N,LEG-10141
+CUST-000142,Amelia Garcia,23/09/1969, AMELIA.GARCIA142@BANKMAIL.PH ,09177161934,Pasig,Davao del Sur,1498,PH,08/27/2020,SIMPLIFIED,priority,Mass Affluent,Y,"674,045.44","151,383.88",2020,Y,LEG-10142
+CUST-000143,AJ Santos,30/10/1993,aj.santos143@bankmail.ph,09979618166,Manila,Iloilo,8466,PH,01/10/2024,SIMPLIFIED,lite,Mass,Y,"667,725.78","129,846.57",2024,N,LEG-10143
+CUST-000144,Amelia Perez,23/02/2004,amelia.perez144@inbox.ph,09796262369,Quezon City,Iloilo,5677,PH,07/24/2022,FULL,privilege,Mass Affluent,Y,"3,739,595.75","1,288,239.34",2022,N,LEG-10144
+CUST-000145,Pam Villanueva,23/11/2001,pam.villanueva145@example.com,09016171228,Mandaluyong,Cebu,7081,PH,04/17/2021,FULL,privilege,SME,Y,"1,945,044.42","445,070.52",2021,N,LEG-10145
+CUST-000146,Isabella Torres,26/03/1989,isabella.torres146@bankmail.ph,09476907288,Davao City,Cebu,9767,PH,04/19/2018,FULL,privilege,Mass Affluent,N,"2,244,625.80","884,850.94",2018,N,LEG-10146
+CUST-000147,Jose Cruz,05/02/2001,jose.cruz147@example.com,09345152371,Quezon City,Davao del Sur,5768,PH,12/08/2022,SIMPLIFIED,priority,Mass,Y,"1,589,977.17","201,905.96",2022,N,LEG-10147
+CUST-000148,Andrea Perez,26/04/2000,andrea.perez148@mail.com,09450223327,Bacolod,Negros Occidental,9890,PH,12/19/2021,FULL,lite,Mass Affluent,Y,"1,219,891.99","78,020.68",2021,Y,LEG-10148
+CUST-000149,Daniel Ramos,04/03/1965,daniel.ramos149@bankmail.ph,0927-057-5542,Pasig,Davao del Sur,5919,PH,09/04/2023,BASIC,lite,Mass Affluent,Y,"1,066,662.48","309,216.72",2023,N,LEG-10149
+CUST-000150,Lucas Garcia,31/03/2003,lucas.garcia150@bankmail.ph,0969-714-3007,Bacolod,Metro Manila,5223,PH,12/30/2020,BASIC,lite,Mass Affluent,Y,"30,488.74","9,210.65",2020,Y,LEG-10150
+CUST-000151,Jose Soriano,06/07/1961,jose.soriano151@inbox.ph,0991-730-7436,Davao City,Cebu,5137,PH,12/01/2023,BASIC,prestige,Mass Affluent,Y,"4,335,827.72","1,200,066.98",2023,Y,LEG-10151
+CUST-000152,Juan Rivera,07/09/1967,juan.rivera152@example.com,09053502772,Bacolod,Cebu,1281,PH,02/26/2021,FULL,priority,Mass,N,"2,306,864.75","559,143.91",2021,N,LEG-10152
+CUST-000153,Pam Reyes,23/10/1963,pam.reyes153@mail.com,09743161693,Davao City,Davao del Sur,6355,PH,10/05/2017,SIMPLIFIED,lite,Mass Affluent,Y,"3,928,514.90","1,175,685.45",2017,Y,LEG-10153
+CUST-000154,Sofia Villanueva,02/04/1987,sofia.villanueva154@mail.com,09634474160,Mandaluyong,Cebu,8176,PH,02/11/2024,FULL,priority,Affluent,Y,"2,909,870.56","558,104.63",2024,N,LEG-10154
+CUST-000155,Marts Bautista,26/06/2004,marts.bautista155@gmail.com,09594732772,Davao City,Iloilo,5356,PH,10/06/2020,FULL,priority,Affluent,Y,"702,713.09","74,296.34",2020,N,LEG-10155
+CUST-000156,Marts Soriano,18/05/1998, MARTS.SORIANO156@INBOX.PH ,09072226573,Davao City,Metro Manila,0619,PH,05/24/2021,FULL,lite,Mass Affluent,Y,"870,075.23","242,565.11",2021,Y,LEG-10156
+CUST-000157,Aaron Soriano,09/05/2001,aaron.soriano157@inbox.ph,09395384465,Quezon City,Negros Occidental,1062,PH,08/01/2017,FULL,lite,Mass,Y,"2,073,653.81","343,352.84",2017,N,LEG-10157
+CUST-000158,Ana Castillo,22/12/1997,ana.castillo158@mail.com,09564215158,Quezon City,Metro Manila,1954,PH,03/18/2024,FULL,privilege,Microfinance,Y,"1,417,989.68","113,456.16",2024,N,LEG-10158
+CUST-000159,Kayle Valdez,19/03/1998, KAYLE.VALDEZ159@MAIL.COM ,0924-157-6516,Davao City,Iloilo,5231,PH,09/04/2016,SIMPLIFIED,priority,Mass,Y,"3,027,949.58","339,426.38",2016,N,LEG-10159
+CUST-000160,Daniel Valdez,03/07/1958,daniel.valdez160@example.com,09069509644,Makati,Iloilo,4947,PH,06/17/2021,FULL,priority,Mass Affluent,N,"489,486.82","47,411.25",2021,Y,LEG-10160
+CUST-000161,Glenn Gonzales,31/05/1980,glenn.gonzales161@bankmail.ph,09207055328,Cebu City,Davao del Sur,1452,PH,06/16/2019,FULL,privilege,Mass Affluent,N,"3,775,104.53","734,748.05",2019,Y,LEG-10161
+CUST-000162,Isabella Rivera,13/01/1971,isabella.rivera162@inbox.ph,09549573181,Pasig,Negros Occidental,7915,PH,08/02/2015,FULL,priority,Affluent,Y,"804,529.31","311,835.23",2015,N,LEG-10162
+CUST-000163,Juan Reyes,25/04/1997,juan.reyes163@bankmail.ph,09023679462,Iloilo City,Metro Manila,9864,PH,05/18/2015,FULL,privilege,Mass,Y,"3,920,013.27","896,474.69",2015,N,LEG-10163
+CUST-000164,Amelia Gonzales,16/03/1970,amelia.gonzales164@example.com,09369023642,Makati,Metro Manila,9575,PH,03/07/2017,FULL,lite,Mass Affluent,Y,"2,274,340.28","435,274.08",2017,Y,LEG-10164
+CUST-000165,Juan Flores,11/07/1991,juan.flores165@example.com,09553152572,Davao City,Negros Occidental,5779,PH,04/21/2016,SIMPLIFIED,privilege,Mass Affluent,Y,"1,289,841.00","237,247.72",2016,N,LEG-10165
+CUST-000166,Isabella Gonzales,29/04/1983,isabella.gonzales166@bankmail.ph,09950820680,Quezon City,Negros Occidental,3251,PH,08/19/2017,BASIC,priority,Affluent,Y,"3,677,409.90","1,307,171.66",2017,Y,LEG-10166
+CUST-000167,Miguel Gonzales,27/05/1977,miguel.gonzales167@inbox.ph,0911-966-6750,Davao City,Davao del Sur,6498,PH,02/21/2018,FULL,privilege,SME,N,"1,989,999.61","621,992.86",2018,Y,LEG-10167
+CUST-000168,Luis Santos,18/12/1992,luis.santos168@bankmail.ph,09903874153,Makati,Metro Manila,6313,PH,11/16/2021,SIMPLIFIED,lite,SME,Y,"1,716,139.20","196,274.47",2021,Y,LEG-10168
+CUST-000169,Levy Bautista,26/05/1988,levy.bautista169@inbox.ph,09821152022,Cebu City,Negros Occidental,1874,PH,01/27/2022,BASIC,lite,Mass,N,"2,585,517.87","781,333.46",2022,N,LEG-10169
+CUST-000170,Isabella Castillo,07/07/1977, ISABELLA.CASTILLO170@EXAMPLE.COM ,09360846433,Bacolod,Iloilo,9201,PH,04/12/2022,BASIC,prestige,SME,Y,"2,692,652.83","1,057,621.78",2022,N,LEG-10170
+CUST-000171,Pam Aquino,17/10/2000,pam.aquino171@bankmail.ph,09740649869,Cebu City,Iloilo,5801,PH,03/25/2022,SIMPLIFIED,lite,Mass,Y,"1,977,881.17","713,406.18",2022,Y,LEG-10171
+CUST-000172,Ethan Aquino,26/09/2001,ethan.aquino172@bankmail.ph,09410769701,BGC,Metro Manila,0850,PH,09/28/2016,BASIC,priority,Mass Affluent,Y,"422,472.02","158,873.29",2016,Y,LEG-10172
+CUST-000173,Marlon Torres,12/03/1977,marlon.torres173@inbox.ph,09415103984,Bacolod,Davao del Sur,5195,PH,11/17/2019,FULL,privilege,Mass Affluent,N,"2,617,775.56","716,838.27",2019,Y,LEG-10173
+CUST-000174,Pam Aquino,01/06/2003, PAM.AQUINO174@MAIL.COM ,0984-323-0883,Davao City,Iloilo,0994,PH,01/30/2015,SIMPLIFIED,lite,Mass,Y,"2,741,512.77","318,015.05",2015,N,LEG-10174
+CUST-000175,Daniel Rivera,01/06/1990,daniel.rivera175@mail.com,09173324279,Mandaluyong,Davao del Sur,6521,PH,01/29/2020,BASIC,lite,Mass,Y,"1,361,398.52","364,805.55",2020,Y,LEG-10175
+CUST-000176,Miguel Ramos,25/08/1968,miguel.ramos176@example.com,09909214000,Pasig,Davao del Sur,4743,PH,08/21/2016,BASIC,lite,Mass Affluent,Y,"281,135.68","90,379.08",2016,Y,LEG-10176
+CUST-000177,Jose Rivera,17/04/1971,jose.rivera177@mail.com,09823097392,Makati,Cebu,4759,PH,01/21/2022,SIMPLIFIED,privilege,Mass Affluent,Y,"3,641,457.15","1,131,231.78",2022,N,LEG-10177
+CUST-000178,Quiel Perez,22/09/1977,quiel.perez178@bankmail.ph,09618821631,Mandaluyong,Iloilo,1700,PH,01/02/2016,SIMPLIFIED,privilege,Affluent,Y,"1,244,362.56","279,946.39",2016,N,LEG-10178
+CUST-000179,Liam Valdez,21/05/1960,liam.valdez179@example.com,0931-514-3563,Davao City,Cebu,0372,PH,06/30/2020,SIMPLIFIED,privilege,Mass,Y,"949,689.41","109,517.57",2020,N,LEG-10179
+CUST-000180,Aaron Ramos,13/09/1979,aaron.ramos180@mail.com,09012230631,Makati,Iloilo,8727,PH,07/30/2020,SIMPLIFIED,privilege,Mass Affluent,Y,"3,828,904.74","397,999.45",2020,Y,LEG-10180
+CUST-000181,Pam Ramos,22/11/1983,pam.ramos181@example.com,0906-091-0110,Cebu City,Negros Occidental,5723,PH,07/05/2020,FULL,lite,Mass Affluent,Y,"4,642,090.19","1,584,007.41",2020,Y,LEG-10181
+CUST-000182,Kayle Santos,25/04/1992,kayle.santos182@inbox.ph,09706578025,BGC,Cebu,5152,PH,03/08/2016,FULL,lite,Mass Affluent,Y,"3,831,650.82","964,799.26",2016,Y,LEG-10182
+CUST-000183,Liam Domingo,04/05/1964,liam.domingo183@mail.com,09755655995,Manila,Davao del Sur,4683,PH,05/08/2023,SIMPLIFIED,privilege,Mass,Y,"1,271,191.55","491,414.84",2023,N,LEG-10183
+CUST-000184,Kayle Navarro,09/02/1958,kayle.navarro184@inbox.ph,09559332808,Mandaluyong,Iloilo,5550,PH,10/20/2017,SIMPLIFIED,lite,Mass Affluent,N,"1,165,737.75","389,211.84",2017,N,LEG-10184
+CUST-000185,Jose Soriano,04/07/1974,jose.soriano185@example.com,09771865953,Iloilo City,Negros Occidental,0073,PH,07/17/2017,FULL,lite,Affluent,N,"3,738,645.61","1,298,496.52",2017,Y,LEG-10185
+CUST-000186,Juan Navarro,06/05/1982, JUAN.NAVARRO186@EXAMPLE.COM ,09353616997,Iloilo City,Iloilo,0471,PH,12/11/2017,FULL,privilege,Mass,Y,"426,309.86","96,191.74",2017,N,LEG-10186
+CUST-000187,Ethan Mendoza,22/02/1998,ethan.mendoza187@gmail.com,09461672073,Iloilo City,Metro Manila,1431,PH,12/03/2018,FULL,privilege,Mass,Y,"3,081,488.75","1,221,981.97",2018,Y,LEG-10187
+CUST-000188,Kayle Valdez,08/07/1994,kayle.valdez188@example.com,09926170726,Quezon City,Davao del Sur,0614,PH,11/13/2020,SIMPLIFIED,lite,Mass,Y,"3,752,025.39","908,290.38",2020,Y,LEG-10188
+CUST-000189,Johnna Mendoza,14/10/1988, JOHNNA.MENDOZA189@EXAMPLE.COM ,09202624906,Manila,Metro Manila,0862,PH,09/20/2024,BASIC,prestige,Mass Affluent,Y,"2,985,934.94","241,285.14",2024,N,LEG-10189
+CUST-000190,Miguel Perez,05/12/1956,miguel.perez190@example.com,0925-331-3362,Bacolod,Davao del Sur,8688,PH,09/13/2016,SIMPLIFIED,lite,Affluent,Y,"1,709,588.98","320,541.62",2016,Y,LEG-10190
+CUST-000191,Luis Reyes,18/09/2001,luis.reyes191@mail.com,09454364165,Pasig,Cebu,3751,PH,10/09/2016,BASIC,prestige,Microfinance,N,"1,588,163.56","389,209.82",2016,N,LEG-10191
+CUST-000192,Noah Garcia,30/06/1983,noah.garcia192@mail.com,09778444989,Mandaluyong,Cebu,7117,PH,08/09/2017,SIMPLIFIED,lite,Mass Affluent,Y,"1,155,330.98","68,314.23",2017,N,LEG-10192
+CUST-000193,Jose Castillo,25/01/2000, JOSE.CASTILLO193@BANKMAIL.PH ,09738411070,Mandaluyong,Negros Occidental,2622,PH,09/18/2022,SIMPLIFIED,prestige,Mass,Y,"1,625,153.24","341,510.88",2022,N,LEG-10193
+CUST-000194,Kylie Villanueva,02/10/1958,kylie.villanueva194@bankmail.ph,09739556701,Davao City,Metro Manila,8259,PH,02/16/2017,FULL,lite,Mass,N,"1,456,605.63","275,755.78",2017,Y,LEG-10194
+CUST-000195,Pam Torres,08/12/1969,pam.torres195@bankmail.ph,09296946051,Iloilo City,Iloilo,1441,PH,10/21/2017,BASIC,privilege,Mass Affluent,Y,"1,621,049.83","449,033.64",2017,Y,LEG-10195
+CUST-000196,Amelia Cruz,08/03/1963,amelia.cruz196@example.com,0976-077-9615,Makati,Cebu,9561,PH,06/21/2018,FULL,lite,SME,Y,"3,651,078.57","1,410,550.90",2018,N,LEG-10196
+CUST-000197,Pam Cruz,21/10/1966,pam.cruz197@mail.com,09070448642,Davao City,Negros Occidental,4062,PH,07/20/2015,SIMPLIFIED,privilege,Mass Affluent,N,"925,015.10","64,078.00",2015,N,LEG-10197
+CUST-000198,Aaron Santos,28/11/1957,aaron.santos198@inbox.ph,09301912665,Bacolod,Cebu,9730,PH,07/04/2023,FULL,lite,Affluent,N,"2,137,191.87","518,621.41",2023,N,LEG-10198
+CUST-000199,Pam Castillo,12/12/1965,pam.castillo199@inbox.ph,0934-220-5950,Iloilo City,Davao del Sur,4825,PH,03/06/2023,FULL,priority,Mass Affluent,Y,"3,159,656.18","702,633.47",2023,Y,LEG-10199
+CUST-000200,Andrea Valdez,22/01/1981, ANDREA.VALDEZ200@MAIL.COM ,0900-618-7943,Bacolod,Cebu,0227,PH,09/10/2022,SIMPLIFIED,privilege,Mass,Y,"1,667,081.17","314,440.29",2022,N,LEG-10200
+CUST-000105,ETHAN GARCIA,14/06/1989, ethan.garcia105@inbox.ph ,09931205667,Makati,Davao del Sur,2613,PH,04/30/2019,FULL,priority,Mass Affluent,Y,"564,605.57","126,953.76",2019,N,LEG-10105
+CUST-000068,JOHNNA GARCIA,04/09/1963, johnna.garcia68@bankmail.ph ,09395316400,Manila,Negros Occidental,5181,PH,06/13/2024,SIMPLIFIED,lite,SME,Y,"1,496,872.48","251,071.48",2024,N,LEG-10068
+CUST-000134,MARTS TORRES,09/11/1960, marts.torres134@example.com ,09227538939,Manila,Cebu,1980,PH,08/28/2020,BASIC,prestige,Mass,Y,"845,754.72","150,803.99",2020,N,LEG-10134
+CUST-000185,JOSE SORIANO,04/07/1974, jose.soriano185@example.com ,09771865953,Iloilo City,Negros Occidental,0073,PH,07/17/2017,FULL,lite,Affluent,N,"3,738,645.61","1,298,496.52",2017,Y,LEG-10185
+CUST-000001,SOFIA GARCIA,04/09/1979, sofia.garcia1@mail.com ,09276804025,Makati,Iloilo,1652,PH,10/30/2022,BASIC,priority,Mass Affluent,N,"2,113,649.38","311,245.38",2022,Y,LEG-10001
+CUST-000116,JUAN NAVARRO,13/01/1998, juan.navarro116@bankmail.ph ,09353205082,Davao City,Iloilo,3521,PH,04/07/2023,SIMPLIFIED,lite,Mass,Y,"280,487.37","111,840.75",2023,Y,LEG-10116
+CUST-000033,LUIS DOMINGO,14/06/1998, luis.domingo33@inbox.ph ,09373989238,Cebu City,Metro Manila,3493,PH,06/01/2015,FULL,priority,Microfinance,Y,"632,105.10","245,176.98",2015,Y,LEG-10033
+CUST-000163,JUAN REYES,25/04/1997, juan.reyes163@bankmail.ph ,09023679462,Iloilo City,Metro Manila,9864,PH,05/18/2015,FULL,privilege,Mass,Y,"3,920,013.27","896,474.69",2015,N,LEG-10163
+CUST-000164,AMELIA GONZALES,16/03/1970, amelia.gonzales164@example.com ,09369023642,Makati,Metro Manila,9575,PH,03/07/2017,FULL,lite,Mass Affluent,Y,"2,274,340.28","435,274.08",2017,Y,LEG-10164
+CUST-000149,DANIEL RAMOS,04/03/1965, daniel.ramos149@bankmail.ph ,0927-057-5542,Pasig,Davao del Sur,5919,PH,09/04/2023,BASIC,lite,Mass Affluent,Y,"1,066,662.48","309,216.72",2023,N,LEG-10149
+CUST-000025,KAYLE DELA CRUZ,25/05/1981, kayle.delacruz25@mail.com ,09426353953,Davao City,Davao del Sur,3273,PH,04/14/2023,FULL,prestige,Affluent,Y,"2,421,508.74","735,181.56",2023,N,LEG-10025
+CUST-000010,EMILY PEREZ,07/02/1960, emily.perez10@example.com ,0980-084-9550,BGC,Negros Occidental,6532,PH,03/28/2022,SIMPLIFIED,lite,Mass Affluent,Y,"1,500,685.40","241,103.15",2022,Y,LEG-10010
+CUST-000056,MARIA TORRES,14/06/1967, maria.torres56@bankmail.ph ,0940-028-5751,Mandaluyong,Cebu,3047,PH,03/09/2015,FULL,lite,Mass Affluent,Y,"3,160,142.76","794,038.36",2015,Y,LEG-10056
+CUST-000191,LUIS REYES,18/09/2001, luis.reyes191@mail.com ,09454364165,Pasig,Cebu,3751,PH,10/09/2016,BASIC,prestige,Microfinance,N,"1,588,163.56","389,209.82",2016,N,LEG-10191
+CUST-000049,CIARA CRUZ,18/10/2000, ciara.cruz49@example.com ,09517396112,Quezon City,Iloilo,1709,PH,08/21/2022,SIMPLIFIED,privilege,Mass Affluent,Y,"4,620,847.14","1,143,992.94",2022,N,LEG-10049
+CUST-000108,ANDREA GARCIA,24/04/1967, andrea.garcia108@example.com ,0919-577-1172,BGC,Metro Manila,3452,PH,08/16/2015,SIMPLIFIED,privilege,Microfinance,Y,"2,498,550.42","620,665.27",2015,N,LEG-10108

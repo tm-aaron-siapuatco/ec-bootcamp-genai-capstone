@@ -1,0 +1,25 @@
+# Dagster instance configuration for pipelines project
+# This file configures the Dagster instance to use PostgreSQL for storage
+
+storage:
+  postgres:
+    postgres_db:
+      hostname:
+        env: DATABASE_HOST
+      username:
+        env: DATABASE_USER
+      password:
+        env: DATABASE_PASSWORD
+      db_name:
+        env: DATABASE_NAME
+      port: 5432
+      params:
+        options: "-c search_path=dagster_metadata"
+
+run_launcher:
+  module: dagster.core.launcher
+  class: DefaultRunLauncher
+
+run_coordinator:
+  module: dagster.core.run_coordinator
+  class: DefaultRunCoordinator
