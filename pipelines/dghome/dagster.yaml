@@ -13,8 +13,6 @@ storage:
       db_name:
         env: DATABASE_NAME
       port: 5432
-      params:
-        options: "-c search_path=dagster_metadata"
 
 run_launcher:
   module: dagster.core.launcher

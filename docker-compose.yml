@@ -59,9 +59,6 @@ services:
       - dagster_data:/opt/dagster/dagster_home
 
   dagster-daemon:
-    build:
-      context: ./pipelines
-      dockerfile: Dockerfile
     image: ${GHCR_IMAGE:-dagster-app:latest}
     container_name: dagster-daemon
     restart: always
