@@ -36,7 +36,7 @@ def call_backend(prompt: str, source: str, uploaded_file) -> str:
 
         response = requests.post(
             f"{API_URL}/chat",
-            data={"query": prompt, "source": source},
+            json={"query": prompt, "data_source": source},
             files=files,
             timeout=60,
         )

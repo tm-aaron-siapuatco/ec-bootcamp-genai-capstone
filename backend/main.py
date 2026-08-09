@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import rag
 
 app = FastAPI(title="RAG Chatbot API")
 
@@ -27,12 +28,18 @@ def health_check():
 
 @app.post("/chat", response_model=ChatResponse)
 def chat_endpoint(request: ChatRequest):
-    #TODO: Psuedocode
-    if request.data_source == "postgres":
-        response_text = f"Querying Gold Table for: {request.query}"
-    elif request.data_source == "chroma":
-        response_text = f"Searching Vector Store for: {request.query}"
+    if request.data_source == "chroma":
+        documents, sources = rag.retrieve(request.query)
+        if not documents:
+            answer = "I don't know based on the provided documents."
+        else:
+            answer = rag.generate(request.query, documents)
+        source_used = ", ".join(sources) if sources else "none"
+    elif request.data_source == "postgres":
+        # text_to_sql?
+        answer = "idk"
     else:
-        response_text = f"Querying BOTH for: {request.query}"
-        
-    return ChatResponse(answer=response_text, source_used=request.data_source)
+        answer = f"Querying BOTH for: {request.query}"
+        source_used = "both"
+
+    return ChatResponse(answer=answer, source_used=source_used)
