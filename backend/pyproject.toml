@@ -9,4 +9,7 @@ dependencies = [
     "chromadb>=1.5.9",
     "openai>=2.48.0",
     "python-dotenv>=1.0.1",
+    "sqlalchemy>=2.0.51",
+    "psycopg2-binary>=2.9.12",
+    "pandas>=3.0.5",
 ]

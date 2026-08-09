@@ -180,7 +180,10 @@ dependencies = [
     { name = "chromadb" },
     { name = "fastapi", extra = ["standard"] },
     { name = "openai" },
+    { name = "pandas" },
+    { name = "psycopg2-binary" },
     { name = "python-dotenv" },
+    { name = "sqlalchemy" },
 ]
 
 [package.metadata]
@@ -188,7 +191,10 @@ requires-dist = [
     { name = "chromadb", specifier = ">=1.5.9" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.141.1" },
     { name = "openai", specifier = ">=2.48.0" },
+    { name = "pandas", specifier = ">=3.0.5" },
+    { name = "psycopg2-binary", specifier = ">=2.9.12" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
+    { name = "sqlalchemy", specifier = ">=2.0.51" },
 ]
 
 [[package]]
