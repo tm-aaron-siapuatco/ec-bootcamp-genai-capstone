@@ -67,7 +67,7 @@ def gold_customers(context: dg.AssetExecutionContext, silver_customers: pd.DataF
     
     return df
 
-@dg.asset_check(asset=gold_customers, description="Ensures all customers were successfully bucketed into tiers")
+@dg.asset_check(asset=gold_customers, description="Ensures all customers were successfully bucketed into tiers", blocking=True)
 def check_no_unassigned_tiers(gold_customers: pd.DataFrame) -> dg.AssetCheckResult:
     # Check if pd.cut produced any NaNs due to out-of-bound values (like negative balances)
     unassigned_value = int(gold_customers["value_tier"].isna().sum())

@@ -27,7 +27,12 @@ class DataResources(dg.ConfigurableResource):
             for filename in os.listdir(filepath)
             if filename.lower().endswith(".pdf")
         )
-
+    def get_pdf_file_path(self, filename:str) -> str:
+        filepath = os.path.join(self.base_directory,"capstone_part_2", filename)
+        if not os.path.isfile(filepath):
+            raise FileNotFoundError(f"PDF not found: {filepath}")
+        return filepath
+    
 class PostgresResource(dg.ConfigurableResource):
     """Postgres Resource"""
     def get_engine(self):

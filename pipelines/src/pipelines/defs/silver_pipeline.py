@@ -110,7 +110,7 @@ def silver_customers(
     
     return merged_df
 
-@dg.asset_check(asset="silver_customers")
+@dg.asset_check(asset="silver_customers", blocking=True)
 def unique_customer_ids(silver_customers: pd.DataFrame) -> dg.AssetCheckResult:
     duplicate_count = silver_customers["customer_id"].duplicated().sum()
 
@@ -121,7 +121,8 @@ def unique_customer_ids(silver_customers: pd.DataFrame) -> dg.AssetCheckResult:
 
 @dg.asset_check(
     asset="silver_customers",
-    description="Ensures all phone numbers match the +63 E.164 format"
+    description="Ensures all phone numbers match the +63 E.164 format",
+    blocking=True,
 )
 def check_phone_format(silver_customers: pd.DataFrame) -> dg.AssetCheckResult:
     # Dropna because some users might not have a phone number, which is fine
@@ -140,7 +141,8 @@ def check_phone_format(silver_customers: pd.DataFrame) -> dg.AssetCheckResult:
 
 @dg.asset_check(
     asset="silver_customers",
-    description="Ensures birthdates are not in the future and users are reasonably aged"
+    description="Ensures birthdates are not in the future and users are reasonably aged",
+    blocking=True,
 )
 def check_logical_birthdates(silver_customers: pd.DataFrame) -> dg.AssetCheckResult:
     birthdates = silver_customers["birthdate"].dropna()

@@ -30,7 +30,7 @@ def retrieve_raw_customers(context: dg.AssetExecutionContext, data: DataResource
 
     return df
 
-@dg.asset_check(asset = retrieve_raw_customers)
+@dg.asset_check(asset = retrieve_raw_customers, blocking=True)
 def non_empty_customers(retrieve_raw_customers: pd.DataFrame):
     total_rows = len(retrieve_raw_customers)
     return dg.AssetCheckResult(
@@ -39,8 +39,14 @@ def non_empty_customers(retrieve_raw_customers: pd.DataFrame):
     )
 
 
-@dg.asset_check(asset=retrieve_raw_customers)
+@dg.asset_check(asset=retrieve_raw_customers, blocking=True)
 def bronze_customer_email_format(retrieve_raw_customers: pd.DataFrame):
+    if "email" not in retrieve_raw_customers.columns:
+        return dg.AssetCheckResult(
+            passed=False,
+            description="Missing required 'email' column.",
+        )
+
     EMAIL_REGEX = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
     email_series = retrieve_raw_customers["email"].dropna().astype(str)
     invalid_emails = email_series[~email_series.str.fullmatch(EMAIL_REGEX.pattern, na=False)].tolist()
@@ -54,7 +60,7 @@ def bronze_customer_email_format(retrieve_raw_customers: pd.DataFrame):
     )
 
 
-@dg.asset_check(asset=retrieve_raw_customers)
+@dg.asset_check(asset=retrieve_raw_customers, blocking=True)
 def bronze_customer_required_fields(retrieve_raw_customers: pd.DataFrame):
     required_columns = ["customer_id", "email", "first_name", "last_name"]
     missing_values = {}
@@ -65,7 +71,9 @@ def bronze_customer_required_fields(retrieve_raw_customers: pd.DataFrame):
         else:
             missing_values[column] = "missing_column"
 
-    passed = all(value == 0 for value in missing_values.values() if isinstance(value, int))
+    # No `isinstance` filter here: a "missing_column" string must fail the
+    # `== 0` comparison too, not be silently excluded from the check.
+    passed = all(value == 0 for value in missing_values.values())
 
     return dg.AssetCheckResult(
         passed=passed,
@@ -99,7 +107,7 @@ def retrieve_raw_crm_contacts(context: dg.AssetExecutionContext, data:DataResour
     
     return df
 
-@dg.asset_check (asset= retrieve_raw_crm_contacts)
+@dg.asset_check (asset= retrieve_raw_crm_contacts, blocking=True)
 def non_empty_contacts(retrieve_raw_crm_contacts:pd.DataFrame):
     total_rows = len(retrieve_raw_crm_contacts)
 

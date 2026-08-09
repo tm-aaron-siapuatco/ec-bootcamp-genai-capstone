@@ -2,7 +2,10 @@ import dagster as dg
 from .resources import DataResources, ChromaDBResource
 from ..utils import extract_text, chunk_text
 import os
-from uuid import uuid4
+
+class IngestProductsConfig(dg.Config):
+    """Optional single-file target; when unset, processes the whole PDF directory."""
+    target_file: str | None = None
 
 @dg.asset(group_name = "ingest")
 def chromadb_status(context: dg.AssetExecutionContext, vector_db: ChromaDBResource):
@@ -37,13 +40,19 @@ def chromadb_status(context: dg.AssetExecutionContext, vector_db: ChromaDBResour
     return result
 
 @dg.asset(group_name="ingest")
-def ingest_products(context: dg.AssetExecutionContext, chromadb_status: dict, data: DataResources, vector_db: ChromaDBResource):
+def ingest_products(
+    context: dg.AssetExecutionContext,
+    config: IngestProductsConfig,
+    chromadb_status: dict,
+    data: DataResources,
+    vector_db: ChromaDBResource,
+):
     """Ingests products pdfs that goes through chunking, embedding and storing in ChromaDB"""
 
     # Safeguard: Abort if the upstream status is unhealthy
     if not chromadb_status["status"].startswith("Healthy"):
         raise Exception(f"Aborting ingestion: ChromaDB is not healthy. Status: {chromadb_status['status']}")
-    
+
     # Setup
     chroma_client = vector_db.get_client()
     openai_ef = vector_db.embedding_function()
@@ -56,7 +65,10 @@ def ingest_products(context: dg.AssetExecutionContext, chromadb_status: dict, da
         embedding_function=openai_ef
     )
 
-    pdf_files = data.get_pdf_files()
+    if config.target_file:
+        pdf_files = [data.get_pdf_file_path(config.target_file)]
+    else:
+        pdf_files = data.get_pdf_files()
     context.log.info(f"Discovered {len(pdf_files)} PDFs for processing.")
 
     total_chunks = 0
@@ -76,7 +88,8 @@ def ingest_products(context: dg.AssetExecutionContext, chromadb_status: dict, da
             documents, chunk_ids, metadatas = [], [], []
 
             for i, chunk in enumerate(chunks):
-                chunk_id = f"{product_name}_{i}_{uuid4()}"
+                # upserts in place instead of piling up duplicate chunks.
+                chunk_id = f"{product_name}_{i}"
 
                 documents.append(chunk)
                 chunk_ids.append(chunk_id)
@@ -90,7 +103,8 @@ def ingest_products(context: dg.AssetExecutionContext, chromadb_status: dict, da
                     "file_type": file_extension,
                 })
 
-            # Add to ChromaDB
+            # Upsert to not duplicate chunks
+            collection.delete(where={"source_file": file_name})
             collection.upsert(
                 ids=chunk_ids,
                 documents=documents,
@@ -121,7 +135,7 @@ def ingest_products(context: dg.AssetExecutionContext, chromadb_status: dict, da
         }
     )
 
-@dg.asset_check(asset="ingest_products", description="Ensures processed_count and total_chunks are greater than zero")
+@dg.asset_check(asset="ingest_products", description="Ensures processed_count and total_chunks are greater than zero", blocking=True)
 def check_ingestion_counts_greater_than_zero(vector_db: ChromaDBResource):
     client = vector_db.get_client()
     collection_name = os.getenv("CHROMADB_COLLECTION_NAME", "knowledge_base")
