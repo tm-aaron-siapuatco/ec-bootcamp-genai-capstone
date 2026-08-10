@@ -12,8 +12,8 @@ def init_session_state():
         st.session_state.use_postgres = False
     if "use_chroma" not in st.session_state:
         st.session_state.use_chroma = False
-    if "uploaded_file" not in st.session_state:
-        st.session_state.uploaded_file = None
+    if "processed_uploads" not in st.session_state:
+        st.session_state.processed_uploads = {}  # {filename: (success, message)}
 
 
 def get_source_string() -> str | None:
@@ -27,17 +27,30 @@ def get_source_string() -> str | None:
     return None
 
 
-def call_backend(prompt: str, source: str, uploaded_file) -> str:
-    """Send the user's message (and optional file) to the FastAPI backend."""
+def call_upload(uploaded_file) -> tuple[bool, str]:
+    """Send the uploaded file to the backend and wait for Dagster to finish processing it."""
     try:
-        files = None
-        if uploaded_file is not None:
-            files = {"file": (uploaded_file.name, uploaded_file.getvalue(), uploaded_file.type)}
+        files = {"file": (uploaded_file.name, uploaded_file.getvalue(), uploaded_file.type)}
+        response = requests.post(f"{API_URL}/upload", files=files, timeout=180)
+        response.raise_for_status()
+        data = response.json()
+        return data.get("status") == "success", data.get("message", "No message returned.")
+    except requests.exceptions.ConnectionError:
+        return False, "Couldn't reach the backend. Is the FastAPI server running?"
+    except requests.exceptions.Timeout:
+        return False, "The backend took too long to process the upload."
+    except requests.exceptions.HTTPError as e:
+        return False, f"Backend returned an error: {e}"
+    except Exception as e:
+        return False, f"Unexpected error: {e}"
 
+
+def call_backend(prompt: str, source: str) -> str:
+    """Send the user's message to the FastAPI backend."""
+    try:
         response = requests.post(
             f"{API_URL}/chat",
             json={"query": prompt, "data_source": source},
-            files=files,
             timeout=60,
         )
         response.raise_for_status()
@@ -79,14 +92,28 @@ def main():
 
     # --- File upload ---
     with st.expander("Attach a document (optional)"):
-        uploaded = st.file_uploader(
-            "Upload a PDF or text file to include as context",
-            type=["pdf", "txt", "csv"],
+        st.caption(
+            "PDF: any bank product doc. CSV: must be named exactly `core_customers.csv` "
+            "and/or `crm_contacts.csv` — attach both for a complete customer record."
+        )
+        uploaded_files = st.file_uploader(
+            "Upload PDFs or CSVs to add to the knowledge base",
+            type=["pdf", "csv"],
+            accept_multiple_files=True,
             label_visibility="collapsed",
         )
-        if uploaded is not None:
-            st.session_state.uploaded_file = uploaded
-            st.success(f"Attached: {uploaded.name}")
+        for uploaded in uploaded_files:
+            if uploaded.name not in st.session_state.processed_uploads:
+                with st.spinner(f"Processing {uploaded.name}… running the Dagster pipeline, this can take a bit."):
+                    success, message = call_upload(uploaded)
+                st.session_state.processed_uploads[uploaded.name] = (success, message)
+
+        for uploaded in uploaded_files:
+            success, message = st.session_state.processed_uploads[uploaded.name]
+            if success:
+                st.success(f"**{uploaded.name}**: {message}")
+            else:
+                st.error(f"**{uploaded.name}**: {message}")
 
     st.divider()
 
@@ -108,7 +135,7 @@ def main():
 
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                answer = call_backend(prompt, source, st.session_state.uploaded_file)
+                answer = call_backend(prompt, source)
             st.markdown(answer)
 
         st.session_state.messages.append({"role": "assistant", "content": answer})

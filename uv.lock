@@ -179,6 +179,7 @@ source = { virtual = "backend" }
 dependencies = [
     { name = "chromadb" },
     { name = "fastapi", extra = ["standard"] },
+    { name = "httpx" },
     { name = "openai" },
     { name = "pandas" },
     { name = "psycopg2-binary" },
@@ -190,6 +191,7 @@ dependencies = [
 requires-dist = [
     { name = "chromadb", specifier = ">=1.5.9" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.141.1" },
+    { name = "httpx", specifier = ">=0.28.1" },
     { name = "openai", specifier = ">=2.48.0" },
     { name = "pandas", specifier = ">=3.0.5" },
     { name = "psycopg2-binary", specifier = ">=2.9.12" },

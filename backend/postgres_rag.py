@@ -9,7 +9,7 @@ load_dotenv()
 TABLE_NAME = "gold_customers"
 TOP_K = 3
 
-# Don't query PII like national_id / customer_id
+# Exclude PII national_id / customer_id
 DISPLAY_COLUMNS = [
     "full_name", "cust_id", "email", "phone_e164", "city", "province",
     "segment", "hexagon_tier", "kyc_level", "status", "value_tier", "tenure",
@@ -20,7 +20,7 @@ EMAIL_REGEX = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
 CUST_ID_REGEX = re.compile(r"\bCUST-\d+\b", re.IGNORECASE)
 WORD_REGEX = re.compile(r"[A-Za-z]+")
 
-# Filtered outdurring scanning for customer
+# Filtered out when scanning for name
 QUESTION_STOPWORDS = {
     "what", "who", "how", "where", "when", "is", "are", "does", "do", "can",
     "show", "tell", "which", "why", "please", "the", "a", "an", "me", "about",
@@ -56,12 +56,16 @@ def run_query(sql: str, params: dict, top_k: int) -> pd.DataFrame:
 
 def to_result(df: pd.DataFrame) -> tuple[list[str], list[str]]:
     documents = [row_to_text(row) for _, row in df.iterrows()]
-    sources = [f"gold_customers ({row['cust_id']})" for _, row in df.iterrows()]
+    # cust_id is only present for customers with a matched CRM row -- a
+    sources = [
+        f"gold_customers ({row['cust_id'] if pd.notna(row['cust_id']) else row['customer_id']})"
+        for _, row in df.iterrows()
+    ]
     return documents, sources
 
 
 def retrieve(question: str, top_k: int = TOP_K) -> tuple[list[str], list[str]]:
-    """Gold_customers lookup by email, customer ID, or name in the question."""
+    """Look up matching gold_customers rows by email, customer ID, or name in the question."""
     email_match = EMAIL_REGEX.search(question)
     if email_match:
         df = run_query(
