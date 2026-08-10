@@ -1,21 +1,28 @@
 from .resources import DataResources, PostgresResource
+from ..utils import upsert_dataframe
 import dagster as dg
 import pandas as pd
 import re
 
+class RawCustomersConfig(dg.Config):
+    """Optional single-file target; when unset, processes the base core_customers.csv."""
+    target_file: str | None = None
+
+class RawCrmContactsConfig(dg.Config):
+    """Optional single-file target; when unset, processes the base crm_contacts.csv."""
+    target_file: str | None = None
+
 @dg.asset(group_name="medallion")
-def retrieve_raw_customers(context: dg.AssetExecutionContext, data: DataResources, database: PostgresResource) -> pd.DataFrame:
-    df = data.read_csv("core_customers.csv")
+def retrieve_raw_customers(
+    context: dg.AssetExecutionContext,
+    config: RawCustomersConfig,
+    data: DataResources,
+    database: PostgresResource,
+) -> pd.DataFrame:
+    df = data.read_csv(config.target_file or "core_customers.csv")
 
     engine = database.get_engine()
-    
-    df.to_sql(
-        name="bronze_customers",
-        con = engine, 
-        schema = "public",
-        if_exists = "replace",
-        index = False
-    )
+    upsert_dataframe(df, table_name="bronze_customers", key_column="customer_id", engine=engine)
 
     # Logging purposes
     total_rows = len(df)
@@ -82,17 +89,18 @@ def bronze_customer_required_fields(retrieve_raw_customers: pd.DataFrame):
 
 
 @dg.asset(group_name="medallion")
-def retrieve_raw_crm_contacts(context: dg.AssetExecutionContext, data:DataResources, database: PostgresResource) -> pd.DataFrame:
-    df = data.read_csv("crm_contacts.csv")
+def retrieve_raw_crm_contacts(
+    context: dg.AssetExecutionContext,
+    config: RawCrmContactsConfig,
+    data: DataResources,
+    database: PostgresResource,
+) -> pd.DataFrame:
+    df = data.read_csv(config.target_file or "crm_contacts.csv")
     engine = database.get_engine()
 
-    df.to_sql(
-        name="bronze_contacts",
-        con = engine,
-        schema="public",
-        if_exists="replace",
-        index = False
-    )
+    # Bronze preserves the source data as-is, including duplicate cust_ids --
+    # silver_customers already dedupes by email during its own cleanup pass.
+    upsert_dataframe(df, table_name="bronze_contacts", key_column="cust_id", engine=engine)
 
     # Logging purposes
     total_rows = len(df)

@@ -1,6 +1,7 @@
 from pypdf import PdfReader
 import pandas as pd
 import re
+from sqlalchemy import text
 
 def normalize_phone(value):
     if pd.isna(value):
@@ -22,7 +23,6 @@ def extract_text(file) -> str:
         text += page.extract_text() or ""
     return text
 
-#TODO: Once we can evaluate the LLM's reponse, adjust accordingly the chunking values or methods
 def chunk_text(text:str, chunk_size: int = 1000, overlap: int = 200):
     if len(text) <= chunk_size:
         return [text]
@@ -43,3 +43,25 @@ def chunk_text(text:str, chunk_size: int = 1000, overlap: int = 200):
         start += chunk_size - overlap
 
     return chunks
+
+def upsert_dataframe(df: pd.DataFrame, table_name: str, key_column: str, engine) -> None:
+    """ 
+    Upsert a DataFrame into a Postgres table by key_column instead of replacing it.
+    Deletes any existing rows matching this DataFrame's keys, then appends --
+    """
+    if key_column not in df.columns:
+        raise ValueError(f"upsert_dataframe: key column '{key_column}' not present in DataFrame")
+
+    with engine.begin() as conn:
+        table_exists = conn.execute(
+            text("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = :t)"),
+            {"t": table_name},
+        ).scalar()
+
+        if table_exists:
+            conn.execute(
+                text(f'DELETE FROM "{table_name}" WHERE "{key_column}" = ANY(:keys)'),
+                {"keys": df[key_column].tolist()},
+            )
+
+        df.to_sql(name=table_name, con=conn, schema="public", if_exists="append", index=False)

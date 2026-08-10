@@ -1,22 +1,24 @@
 import dagster as dg
 import pandas as pd
 from .resources import PostgresResource
-from ..utils import normalize_phone
+from ..utils import normalize_phone, upsert_dataframe
 
 @dg.asset(group_name="medallion")
 def silver_customers(
     context: dg.AssetExecutionContext,
-    retrieve_raw_customers: pd.DataFrame, 
-    retrieve_raw_crm_contacts: pd.DataFrame, 
+    retrieve_raw_customers: pd.DataFrame,
+    retrieve_raw_crm_contacts: pd.DataFrame,
     database: PostgresResource
 ) -> pd.DataFrame:
-    
-    # capture counts before any transformations or drops
-    core_initial_count = len(retrieve_raw_customers)
-    crm_initial_count = len(retrieve_raw_crm_contacts)
-    
-    customer_df = retrieve_raw_customers.copy()
-    crm_df = retrieve_raw_crm_contacts.copy()
+
+    engine = database.get_engine()
+
+    # This run's freshly-materialized upload, just for "records ingested this
+    this_run_core_count = len(retrieve_raw_customers)
+    this_run_crm_count = len(retrieve_raw_crm_contacts)
+
+    customer_df = pd.read_sql("SELECT * FROM bronze_customers", engine)
+    crm_df = pd.read_sql("SELECT * FROM bronze_contacts", engine)
 
     # Transform Core data
     name_columns = ["first_name", "middle_name", "last_name"]
@@ -81,33 +83,25 @@ def silver_customers(
     merged_df["phone_e164"] = merged_df["phone_e164"].astype("string")
     # Logging counts
     post_dedup_and_dropna_count = len(merged_df)
-    total_records_ingested = core_initial_count + crm_initial_count
-    total_dropped_rows = total_records_ingested - post_dedup_and_dropna_count
-    
+    total_records_in_bronze = len(customer_df) + len(crm_df)
+    total_dropped_rows = total_records_in_bronze - post_dedup_and_dropna_count
+
     null_counts = merged_df.isnull().sum().to_dict()
     total_nulls = sum(null_counts.values())
 
     # Log metadata and write to database
     context.add_output_metadata({
-        "core_records_ingested": core_initial_count,
-        "crm_records_ingested": crm_initial_count,
-        "total_dropped_rows (duplicates + nulls)": total_dropped_rows,
+        "core_records_ingested_this_run": this_run_core_count,
+        "crm_records_ingested_this_run": this_run_crm_count,
+        "total_dropped_rows (duplicates + nulls, full bronze)": total_dropped_rows,
         "final_silver_rows": post_dedup_and_dropna_count,
         "total_nulls": total_nulls,
         "null_counts_by_col": null_counts,
         "phone_e164_non_null_count": int(merged_df["phone_e164"].notna().sum()),
     })
 
-    engine = database.get_engine()
-    schema_name = "public" if engine.dialect.name == "postgresql" else None
-    merged_df.to_sql(
-        name="silver_customers",
-        con=engine,
-        schema="public",
-        if_exists="replace",
-        index=False
-    )
-    
+    upsert_dataframe(merged_df, table_name="silver_customers", key_column="customer_id", engine=engine)
+
     return merged_df
 
 @dg.asset_check(asset="silver_customers", blocking=True)

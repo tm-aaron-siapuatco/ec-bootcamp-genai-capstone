@@ -1,4 +1,5 @@
 from .resources import PostgresResource
+from ..utils import upsert_dataframe
 import dagster as dg
 import pandas as pd
 
@@ -31,15 +32,8 @@ def gold_customers(context: dg.AssetExecutionContext, silver_customers: pd.DataF
     # Add timestamp for observability logs
     df["gold_timestamp"] = pd.Timestamp.now()
 
-    # Write to DB
     engine = database.get_engine()
-    df.to_sql(
-        name="gold_customers",
-        con=engine,
-        schema="public",
-        if_exists="replace",
-        index=False
-    )
+    upsert_dataframe(df, table_name="gold_customers", key_column="customer_id", engine=engine)
 
     # Calculate metadata metrics before writing to SQL
     initial_rows = len(silver_customers)

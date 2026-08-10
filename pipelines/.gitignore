@@ -5,6 +5,9 @@ chroma_db_data/
 dghome/* 
 !dghome/dagster.yaml
 
+#ignore runtime csv uploads
+data/capstone_part_1/uploads
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
