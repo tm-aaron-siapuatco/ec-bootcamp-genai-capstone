@@ -23,11 +23,11 @@ def _get_collection():
         port=int(os.getenv("CHROMADB_PORT", "8000")),
     )
     embedding_function = embedding_functions.OpenAIEmbeddingFunction(
-        model_name=os.getenv("EMBEDDING_MODEL", "text-embedding-3-large"),
+        model_name=os.getenv("AZURE_OPENAI_API_EMBEDDING_MODEL", "text-embedding-3-large"),
         api_key=os.getenv("AZURE_OPENAI_API_KEY"),
         api_base=os.getenv("AZURE_OPENAI_API_ENDPOINT"),
         api_version="2024-10-21",
-        deployment_id=os.getenv("EMBEDDING_MODEL"),
+        deployment_id=os.getenv("AZURE_OPENAI_API_EMBEDDING_MODEL"),
         api_type="azure",
     )
     return client.get_collection(COLLECTION_NAME, embedding_function=embedding_function)
