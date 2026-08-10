@@ -12,15 +12,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  adminer:
-    image: adminer:latest
-    container_name: adminer
-    restart: always
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
-
   chromadb:
     image: chromadb/chroma:latest
     container_name: chromadb
@@ -58,28 +49,50 @@ services:
       - ./pipelines:/opt/dagster/app
       - dagster_data:/opt/dagster/dagster_home
 
-  dagster-daemon:
-    image: ${GHCR_IMAGE:-dagster-app:latest}
-    container_name: dagster-daemon
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
     restart: always
     depends_on:
       - postgres
       - chromadb
-    entrypoint: ["dagster-daemon", "run"]
+      - dagster-webserver
+    ports:
+      - "8001:8001"
     environment:
-      - DAGSTER_HOME=/opt/dagster/dagster_home
       - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
       - DATABASE_USER=${DATABASE_USER:-postgres}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD:-password}
       - DATABASE_NAME=${DATABASE_NAME:-postgres}
       - CHROMADB_HOST=chromadb
       - CHROMADB_PORT=8000
+      - CHROMADB_COLLECTION_NAME=${CHROMADB_COLLECTION_NAME:-knowledge_base}
+      - DAGSTER_GRAPHQL_URL=http://dagster-webserver:3000/graphql
+      - PIPELINES_PDF_DIR=/pipelines/data/capstone_part_2
+      - PIPELINES_CSV_DIR=/pipelines/data/capstone_part_1
       - AZURE_OPENAI_API_EMBEDDING_MODEL=${AZURE_OPENAI_API_EMBEDDING_MODEL}
       - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
       - AZURE_OPENAI_API_ENDPOINT=${AZURE_OPENAI_API_ENDPOINT}
+      - AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION}
+      - AZURE_OPENAI_API_CHAT_DEPLOYMENT=${AZURE_OPENAI_API_CHAT_DEPLOYMENT}
     volumes:
-      - ./pipelines:/opt/dagster/app
-      - dagster_data:/opt/dagster/dagster_home
+      - ./pipelines:/pipelines
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://backend:8001
 
 volumes:
   dagster_data:

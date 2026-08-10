@@ -1,8 +1,8 @@
 import streamlit as st
 import requests
+import os
 
-API_URL = "http://localhost:8001" # Since docker container of chromaDB is 8000
-
+API_URL = os.getenv("API_URL", "http://localhost:8001")
 
 def init_session_state():
     """Set up persistent state that survives Streamlit's rerun-on-every-interaction model."""
