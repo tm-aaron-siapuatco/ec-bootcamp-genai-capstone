@@ -45,12 +45,12 @@ def call_upload(uploaded_file) -> tuple[bool, str]:
         return False, f"Unexpected error: {e}"
 
 
-def call_backend(prompt: str, source: str) -> str:
-    """Send the user's message to the FastAPI backend."""
+def call_backend(prompt: str, source: str, history: list[dict]) -> str:
+    """Send the user's message and recent chat history to the FastAPI backend."""
     try:
         response = requests.post(
             f"{API_URL}/chat",
-            json={"query": prompt, "data_source": source},
+            json={"query": prompt, "data_source": source, "history": history},
             timeout=60,
         )
         response.raise_for_status()
@@ -129,13 +129,14 @@ def main():
     )
 
     if prompt:
+        history = list(st.session_state.messages)  # snapshot before this turn is appended
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
 
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                answer = call_backend(prompt, source)
+                answer = call_backend(prompt, source, history)
             st.markdown(answer)
 
         st.session_state.messages.append({"role": "assistant", "content": answer})

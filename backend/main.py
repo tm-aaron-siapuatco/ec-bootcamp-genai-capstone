@@ -41,6 +41,7 @@ app.add_middleware(
 class ChatRequest(BaseModel):
     query: str
     data_source: str
+    history: list[dict] = []
 
 class ChatResponse(BaseModel):
     answer: str
@@ -97,22 +98,26 @@ def upload_endpoint(file: UploadFile = File(...)):
 
     return UploadResponse(status="success", message=f"{filename} processed and ready to query.")
 
-def respond(query: str, documents: list[str], sources: list[str]) -> ChatResponse:
+def _respond(query: str, documents: list[str], sources: list[str], history: list[dict]) -> ChatResponse:
     if not documents:
         answer = "I don't know based on the provided documents."
     else:
-        answer = rag.generate(query, documents)
+        answer = rag.generate(query, documents, history=history)
     source_used = ", ".join(sources) if sources else "none"
     return ChatResponse(answer=answer, source_used=source_used)
 
+
 @app.post("/chat", response_model=ChatResponse)
 def chat_endpoint(request: ChatRequest):
+    history_text = " ".join(turn["content"] for turn in request.history)
+    search_query = f"{history_text} {request.query}".strip()
+
     if request.data_source == "chroma":
-        documents, sources = rag.retrieve(request.query)
+        documents, sources = rag.retrieve(search_query)
     elif request.data_source == "postgres":
-        documents, sources = postgres_rag.retrieve(request.query)
+        documents, sources = postgres_rag.retrieve(search_query)
     else:
-        chroma_documents, chroma_sources = rag.retrieve(request.query)
-        postgres_documents, postgres_sources = postgres_rag.retrieve(request.query)
+        chroma_documents, chroma_sources = rag.retrieve(search_query)
+        postgres_documents, postgres_sources = postgres_rag.retrieve(search_query)
         documents, sources = chroma_documents + postgres_documents, chroma_sources + postgres_sources
-    return respond(request.query, documents, sources)
+    return _respond(request.query, documents, sources, request.history)
