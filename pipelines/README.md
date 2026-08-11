@@ -2,6 +2,9 @@
 
 This directory contains the Dagster-based data and retrieval pipeline for the capstone project. It complements the root project README by focusing on the operational logic that runs the pipeline locally: ingesting source files, cleaning and combining customer data through a medallion architecture, and preparing documents for vector search in ChromaDB.
 
+## Pipeline Diagram
+![Pipeline Diagram](../docs/pipeline.png)
+
 ## What this pipeline is doing
 
 The project combines three main components:
@@ -110,20 +113,27 @@ Then activate the virtual environment:
 Install the required dependencies:
 
 ```bash
-pip install -e ".[dev]"
+pip install -e .
 ```
+
+Note: `dagster-dg-cli` (which provides the `dg` command `start-dagster.sh` uses) is declared as a `dependency-group`, not a pip extra, so this path won't install it. If you need `dg`, install it separately (`pip install dagster-dg-cli`) or use the `uv sync` path above instead, which pulls dependency-groups automatically.
 
 ### Running the pipeline locally
 
 From the `pipelines` directory, follow these steps to start the Dagster pipeline locally.
 
-1. Create your environment file from the sample config:
+1. (Optional) Create a `.env` file in this directory if you need to override the defaults:
 
 ```bash
-cp .env.sample .env
+DATABASE_HOST=localhost
+DATABASE_NAME=app-db
+DATABASE_USER=adminuser
+DATABASE_PASSWORD=password
+CHROMADB_HOST=localhost
+CHROMADB_PORT=8000
 ```
 
-Review the values in `.env` and keep the defaults unless you need to change them.
+`start-dagster.sh` falls back to these exact values automatically if no `.env` is present, so this step can be skipped entirely for the default local setup described below. (There's no `.env.sample` in this directory to copy — that file only exists at the repo root, for the Docker Compose stack.)
 
 2. Make sure Docker is installed and running, then start the PostgreSQL container:
 

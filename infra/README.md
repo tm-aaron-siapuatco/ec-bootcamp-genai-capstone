@@ -48,7 +48,7 @@ The VM boots with Docker + the Compose plugin pre-installed via `scripts/init.sh
 There is no manual deploy script — deployment happens through GitHub Actions (`.github/workflows/ci.yml`), triggered on every push to `main`:
 
 1. `build-and-push` builds the `pipelines` (dagster), `backend`, and `frontend` images and pushes them to GHCR.
-2. `deploy` copies `docker-compose.yml` and the `pipelines/` directory to the VM, writes a `.env` from repo secrets, then runs `docker compose pull && docker compose up -d --remove-orphans` over SSH.
+2. `deploy` copies `docker-compose.yml` and the `pipelines/` directory to the VM, writes a `.env` from repo secrets, runs `docker compose pull && docker compose up -d --remove-orphans` over SSH, then materializes the Dagster assets (`dagster asset materialize --select '*' -m pipelines.definitions`) so the knowledge base / customer data exist without a manual "Materialize" click in the Dagster UI.
 
 To redeploy without a code change, re-run the workflow from the Actions tab (`gh workflow run ci.yml`).
 
