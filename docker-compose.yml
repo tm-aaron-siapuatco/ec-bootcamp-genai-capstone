@@ -53,6 +53,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    image: ${BACKEND_IMAGE:-backend:latest}
     container_name: backend
     restart: always
     depends_on:
@@ -85,6 +86,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    image: ${FRONTEND_IMAGE:-frontend:latest}
     container_name: frontend
     restart: always
     depends_on:

@@ -1,0 +1,3 @@
+# (DO NOT COMMIT) Copy this file to `terraform.tfvars` and fill in real values before running Terraform.
+# The SSH public key string (one-line, starts with "ssh-rsa" or similar)
+ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... user@host"

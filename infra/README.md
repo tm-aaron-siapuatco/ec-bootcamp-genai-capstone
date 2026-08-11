@@ -1,0 +1,99 @@
+# Infra-design-milestone-aaron
+This repository contains Infrastructure as Code to deploy an Azure environment (networking + a single Linux VM) using Terraform. The app stack itself (Postgres, ChromaDB, Dagster, backend, frontend) runs as containers on that VM via Docker Compose — there is no managed Azure SQL/database resource in Terraform.
+
+This folder contains the Terraform configuration for the Azure infrastructure.
+
+## Local setup
+
+1. If you already have an SSH keypair, use your public key:
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+
+If you do not have an SSH keypair yet, create one:
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
+```
+
+or, if you need RSA:
+
+```bash
+ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa
+```
+
+2. Copy the example file and fill in your secrets:
+
+```bash
+cp infra/terraform.tfvars.example infra/terraform.tfvars
+```
+
+3. Edit `infra/terraform.tfvars` and set:
+- `ssh_public_key` to the full one-line public key string from `~/.ssh/id_rsa.pub` or `~/.ssh/id_ed25519.pub`
+- `allowed_ssh_cidr` to your own IP in CIDR form, e.g. `203.0.113.10/32` (find it with `curl -s ifconfig.me`). SSH is only allowed from this range.
+
+4. Run Terraform from the `infra/` folder:
+
+```bash
+cd infra
+terraform init
+terraform plan -out=tfplan
+terraform apply tfplan
+```
+
+The VM boots with Docker + the Compose plugin pre-installed via `scripts/init.sh` (cloud-init). No app code or secrets are baked into the image.
+
+## Deploy the containers
+
+There is no manual deploy script — deployment happens through GitHub Actions (`.github/workflows/ci.yml`), triggered on every push to `main`:
+
+1. `build-and-push` builds the `pipelines` (dagster), `backend`, and `frontend` images and pushes them to GHCR.
+2. `deploy` copies `docker-compose.yml` and the `pipelines/` directory to the VM, writes a `.env` from repo secrets, then runs `docker compose pull && docker compose up -d --remove-orphans` over SSH.
+
+To redeploy without a code change, re-run the workflow from the Actions tab (`gh workflow run ci.yml`).
+
+## Verify the deployment
+
+1. SSH into the VM
+```bash
+ssh -i ~/.ssh/id_rsa azureuser@<vm-public-ip>
+```
+
+```bash
+docker compose ps
+docker compose logs -f
+
+# Verify Port Connectivity & Access the Web UI
+curl -I http://localhost:3000                    # dagster-webserver
+curl -I http://localhost:8000/api/v1/heartbeat    # chromadb
+curl -I http://localhost:8001                     # backend
+curl -I http://localhost:8501                     # frontend
+```
+
+If everything is working correctly the appropriate dev sites should load. Note these ports are only reachable from inside the VM (over SSH) — the NSG only opens 22/80/443, so there's no direct external access to 3000/8000/8001/8501.
+
+## CI/CD setup
+
+The GitHub workflow (`.github/workflows/ci.yml`) authenticates to the VM over SSH — it never talks to the Azure API directly, so no Azure service-principal secrets are needed.
+
+Set these secrets in GitHub:
+- `VM_HOST` — the VM's public IP
+- `VM_USERNAME` — `azureuser`
+- `VM_SSH_KEY` (the one-line public key string from `~/.ssh/id_rsa.pub` or `~/.ssh/id_ed25519.pub`)
+- `AZURE_OPENAI_API_KEY`
+- `AZURE_OPENAI_API_ENDPOINT`
+- `AZURE_OPENAI_API_VERSION`
+- `AZURE_OPENAI_API_CHAT_DEPLOYMENT`
+- `EMBEDDING_MODEL`
+- `DATABASE_HOST`
+- `DATABASE_NAME`
+- `DATABASE_USER`
+- `DATABASE_PASSWORD`
+- `DATABASE_PORT`
+
+## Notes
+
+- Do not commit `infra/terraform.tfvars`.
+- Use the public key string, not the private key file.
+- SSH access is restricted by `allowed_ssh_cidr` in the NSG (enforced by a Terraform validation block — it rejects `*`/`0.0.0.0/0`).
