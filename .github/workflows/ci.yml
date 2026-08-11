@@ -117,3 +117,12 @@ jobs:
             echo "$GH_TOKEN" | docker login ghcr.io -u "$GH_USER" --password-stdin
             docker compose pull
             docker compose up -d --remove-orphans
+
+            # Materialize Dagster assets (same as clicking "Materialize" in the UI)
+            # so the knowledge base / customer data exist without a manual step.
+            # Retries since postgres/chromadb/dagster-webserver may still be starting.
+            for i in $(seq 1 10); do
+              docker compose exec -T dagster-webserver dagster asset materialize --select '*' -m pipelines.definitions && break
+              echo "dagster-webserver not ready yet, retrying in 5s... ($i/10)"
+              sleep 5
+            done
