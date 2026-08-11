@@ -1,0 +1,119 @@
+name: CI/CD Pipeline
+
+
+on:
+  push:
+    branches:
+      - main  # Triggers when code is pushed to the main branch
+
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write  # Needed to push images to GHCR
+
+    strategy:
+      matrix:
+        include:
+          - service: dagster
+            context: ./pipelines
+          - service: backend
+            context: ./backend
+          - service: frontend
+            context: ./frontend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - name: Build and push ${{ matrix.service }} image
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ matrix.context }}
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.service }}:latest
+
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Copy docker-compose and pipelines to Azure VM
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          source: "docker-compose.yml,pipelines"
+          target: "/home/${{ secrets.VM_USERNAME }}/dagster-app"
+
+
+      - name: Deploy to Azure VM via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          # Pass GitHub actions context and secrets to the SSH environment
+          GHCR_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-dagster:latest
+          BACKEND_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest
+          FRONTEND_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_API_ENDPOINT: ${{ secrets.AZURE_OPENAI_API_ENDPOINT }}
+          AZURE_OPENAI_API_VERSION: ${{ secrets.AZURE_OPENAI_API_VERSION }}
+          AZURE_OPENAI_API_CHAT_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_API_CHAT_DEPLOYMENT }}
+          EMBEDDING_MODEL: ${{ secrets.EMBEDDING_MODEL }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USER: ${{ github.actor }}
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          envs: GHCR_IMAGE,BACKEND_IMAGE,FRONTEND_IMAGE,AZURE_OPENAI_API_KEY,AZURE_OPENAI_API_ENDPOINT,AZURE_OPENAI_API_VERSION,AZURE_OPENAI_API_CHAT_DEPLOYMENT,EMBEDDING_MODEL,GH_TOKEN,GH_USER,DATABASE_HOST,DATABASE_NAME,DATABASE_USER,DATABASE_PASSWORD,DATABASE_PORT
+          script: |
+            cd /home/${{ secrets.VM_USERNAME }}/dagster-app
+
+            {
+              echo "GHCR_IMAGE=$GHCR_IMAGE"
+              echo "BACKEND_IMAGE=$BACKEND_IMAGE"
+              echo "FRONTEND_IMAGE=$FRONTEND_IMAGE"
+              echo "CHROMADB_HOST=chromadb"
+              echo "CHROMADB_PORT=8000"
+              echo "AZURE_OPENAI_API_EMBEDDING_MODEL=$EMBEDDING_MODEL"
+              echo "AZURE_OPENAI_API_KEY=$AZURE_OPENAI_API_KEY"
+              echo "AZURE_OPENAI_API_ENDPOINT=$AZURE_OPENAI_API_ENDPOINT"
+              echo "AZURE_OPENAI_API_VERSION=$AZURE_OPENAI_API_VERSION"
+              echo "AZURE_OPENAI_API_CHAT_DEPLOYMENT=$AZURE_OPENAI_API_CHAT_DEPLOYMENT"
+              echo "DATABASE_HOST=$DATABASE_HOST"
+              echo "DATABASE_NAME=$DATABASE_NAME"
+              echo "DATABASE_USER=$DATABASE_USER"
+              echo "DATABASE_PASSWORD=$DATABASE_PASSWORD"
+              echo "DATABASE_PORT=$DATABASE_PORT"
+            } > .env
+            chmod 600 .env
+
+            echo "$GH_TOKEN" | docker login ghcr.io -u "$GH_USER" --password-stdin
+            docker compose pull
+            docker compose up -d --remove-orphans
