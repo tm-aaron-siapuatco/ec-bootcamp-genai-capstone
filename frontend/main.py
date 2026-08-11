@@ -45,8 +45,14 @@ def call_upload(uploaded_file) -> tuple[bool, str]:
         return False, f"Unexpected error: {e}"
 
 
-def call_backend(prompt: str, source: str, history: list[dict]) -> str:
-    """Send the user's message and recent chat history to the FastAPI backend."""
+NO_CONTEXT_ANSWER = "I don't know based on the provided documents."
+
+
+def call_backend(prompt: str, source: str, history: list[dict]) -> dict:
+    """Send the user's message and recent chat history to the FastAPI backend.
+
+    Returns {"answer": str, "source_used": str, "error": bool}.
+    """
     try:
         response = requests.post(
             f"{API_URL}/chat",
@@ -54,15 +60,31 @@ def call_backend(prompt: str, source: str, history: list[dict]) -> str:
             timeout=60,
         )
         response.raise_for_status()
-        return response.json().get("answer", "No answer returned.")
+        data = response.json()
+        return {
+            "answer": data.get("answer", "No answer returned."),
+            "source_used": data.get("source_used", "none"),
+            "error": False,
+        }
     except requests.exceptions.ConnectionError:
-        return "Couldn't reach the backend. Is the FastAPI server running?"
+        return {"answer": "Couldn't reach the backend. Is the FastAPI server running?", "source_used": "none", "error": True}
     except requests.exceptions.Timeout:
-        return "The backend took too long to respond."
+        return {"answer": "The backend took too long to respond.", "source_used": "none", "error": True}
     except requests.exceptions.HTTPError as e:
-        return f"Backend returned an error: {e}"
+        return {"answer": f"Backend returned an error: {e}", "source_used": "none", "error": True}
     except Exception as e:
-        return f"Unexpected error: {e}"
+        return {"answer": f"Unexpected error: {e}", "source_used": "none", "error": True}
+
+
+def render_assistant_turn(answer: str, source_used: str, error: bool) -> None:
+    """Render an assistant answer, making retrieval status and no-context cases visually distinct."""
+    if error:
+        st.error(answer)
+    elif answer.strip() == NO_CONTEXT_ANSWER or source_used == "none":
+        st.warning(f"⚠️ No relevant context found. {answer}")
+    else:
+        st.markdown(answer)
+        st.caption(f"Source: {source_used}")
 
 
 def main():
@@ -71,24 +93,6 @@ def main():
 
     st.title("Gen AI Capstone")
     st.caption("Ask a question, choose a data source, and optionally attach a document.")
-
-    # --- Source toggle buttons ---
-    st.markdown("**Data sources**")
-    col1, col2 = st.columns(2)
-
-    col1, col2 = st.columns(2)
-    with col1:
-        st.session_state.use_postgres = st.toggle(
-            "Customer Data (Postgres)", value=st.session_state.use_postgres
-        )
-    with col2:
-        st.session_state.use_chroma = st.toggle(
-            "Bank Offers (ChromaDB)", value=st.session_state.use_chroma
-    )
-
-    source = get_source_string()
-    if source is None:
-        st.warning("Select at least one data source above to enable chat.")
 
     # --- File upload ---
     with st.expander("Attach a document (optional)"):
@@ -115,12 +119,33 @@ def main():
             else:
                 st.error(f"**{uploaded.name}**: {message}")
 
-    st.divider()
+    # --- Source toggle buttons, kept directly above the chat window (not at the
+    # top of the page) so they stay next to the input as the conversation grows. ---
+    st.markdown("**Data sources**")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.session_state.use_postgres = st.toggle(
+            "Customer Data (Postgres)", value=st.session_state.use_postgres
+        )
+    with col2:
+        st.session_state.use_chroma = st.toggle(
+            "Bank Offers (ChromaDB)", value=st.session_state.use_chroma
+        )
 
-    # --- Chat history ---
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
+    source = get_source_string()
+    if source is None:
+        st.warning("Select at least one data source above to enable chat.")
+
+    # --- Chat history: bounded-height container so it scrolls internally,
+    # keeping the toggles and input fixed in place regardless of chat length. ---
+    chat_box = st.container(height=450)
+    with chat_box:
+        for msg in st.session_state.messages:
+            with st.chat_message(msg["role"]):
+                if msg["role"] == "assistant":
+                    render_assistant_turn(msg["content"], msg.get("source_used", "none"), msg.get("error", False))
+                else:
+                    st.markdown(msg["content"])
 
     # --- Chat input ---
     prompt = st.chat_input(
@@ -129,17 +154,24 @@ def main():
     )
 
     if prompt:
-        history = list(st.session_state.messages)  # snapshot before this turn is appended
+        # history sent to the backend excludes source metadata -- only role/content are relevant upstream
+        history = [{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
         st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
+        with chat_box:
+            with st.chat_message("user"):
+                st.markdown(prompt)
 
-        with st.chat_message("assistant"):
-            with st.spinner("Thinking..."):
-                answer = call_backend(prompt, source, history)
-            st.markdown(answer)
+            with st.chat_message("assistant"):
+                with st.spinner("Thinking..."):
+                    result = call_backend(prompt, source, history)
+                render_assistant_turn(result["answer"], result["source_used"], result["error"])
 
-        st.session_state.messages.append({"role": "assistant", "content": answer})
+        st.session_state.messages.append({
+            "role": "assistant",
+            "content": result["answer"],
+            "source_used": result["source_used"],
+            "error": result["error"],
+        })
 
 
 if __name__ == "__main__":
