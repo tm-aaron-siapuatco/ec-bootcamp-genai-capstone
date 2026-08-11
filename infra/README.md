@@ -31,7 +31,6 @@ cp infra/terraform.tfvars.example infra/terraform.tfvars
 
 3. Edit `infra/terraform.tfvars` and set:
 - `ssh_public_key` to the full one-line public key string from `~/.ssh/id_rsa.pub` or `~/.ssh/id_ed25519.pub`
-- `allowed_ssh_cidr` to your own IP in CIDR form, e.g. `203.0.113.10/32` (find it with `curl -s ifconfig.me`). SSH is only allowed from this range.
 
 4. Run Terraform from the `infra/` folder:
 
@@ -80,7 +79,7 @@ The GitHub workflow (`.github/workflows/ci.yml`) authenticates to the VM over SS
 Set these secrets in GitHub:
 - `VM_HOST` — the VM's public IP
 - `VM_USERNAME` — `azureuser`
-- `VM_SSH_KEY` (the one-line public key string from `~/.ssh/id_rsa.pub` or `~/.ssh/id_ed25519.pub`)
+- `VM_SSH_KEY` — the **private** key content (e.g. `cat ~/.ssh/id_ed25519`), matching the public key you set as `ssh_public_key` in `terraform.tfvars`. GitHub Actions uses this to SSH into the VM as a client, so it needs the private half, not `.pub`.
 - `AZURE_OPENAI_API_KEY`
 - `AZURE_OPENAI_API_ENDPOINT`
 - `AZURE_OPENAI_API_VERSION`
@@ -95,5 +94,5 @@ Set these secrets in GitHub:
 ## Notes
 
 - Do not commit `infra/terraform.tfvars`.
-- Use the public key string, not the private key file.
-- SSH access is restricted by `allowed_ssh_cidr` in the NSG (enforced by a Terraform validation block — it rejects `*`/`0.0.0.0/0`).
+- `ssh_public_key` is the public key file; `VM_SSH_KEY` (the GitHub secret) is the private key content — don't mix these up.
+- SSH (port 22) is open to `0.0.0.0/0` in the NSG. This is intentional, not an oversight: the `deploy` job in `ci.yml` SSHes into the VM from GitHub-hosted Actions runners, which come from a large, constantly-rotating IP pool with no stable range to scope the NSG to. Scoping `Allow-SSH` to a single IP was tried and breaks CI (the runner's IP is never your IP). The actual access control is key-only auth (`disable_password_authentication = true` in `main.tf`) — there is no password to brute-force.
