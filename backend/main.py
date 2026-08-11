@@ -115,9 +115,9 @@ def chat_endpoint(request: ChatRequest):
     if request.data_source == "chroma":
         documents, sources = rag.retrieve(search_query)
     elif request.data_source == "postgres":
-        documents, sources = postgres_rag.retrieve(search_query)
+        documents, sources = postgres_rag.retrieve(request.query)
     else:
         chroma_documents, chroma_sources = rag.retrieve(search_query)
-        postgres_documents, postgres_sources = postgres_rag.retrieve(search_query)
+        postgres_documents, postgres_sources = postgres_rag.retrieve(request.query)
         documents, sources = chroma_documents + postgres_documents, chroma_sources + postgres_sources
     return _respond(request.query, documents, sources, request.history)

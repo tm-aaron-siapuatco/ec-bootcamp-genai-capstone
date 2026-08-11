@@ -122,6 +122,7 @@ def main():
     # --- Source toggle buttons, kept directly above the chat window (not at the
     # top of the page) so they stay next to the input as the conversation grows. ---
     st.markdown("**Data sources**")
+    prev_source = get_source_string()
     col1, col2 = st.columns(2)
     with col1:
         st.session_state.use_postgres = st.toggle(
@@ -133,6 +134,10 @@ def main():
         )
 
     source = get_source_string()
+    if source != prev_source:
+        # Switching data source mid-conversation starts a fresh chat -- otherwise
+        # stale history from the old topic keeps leaking into new questions.
+        st.session_state.messages = []
     if source is None:
         st.warning("Select at least one data source above to enable chat.")
 
